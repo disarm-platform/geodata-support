@@ -9,5 +9,21 @@ test("title", (t) => {
   };
 
   const actual = validate(simplest_valid_geojson);
-  t.is(actual.status, EUnifiedStatus.Red);
+  t.is(actual.status, EUnifiedStatus.Green);
+  t.is(actual.message, "passes schema validation");
 });
+
+test("broken config", t => {
+  const broken_geojson = {
+    feature: [],
+    type: 'Something else'
+  }
+
+  const actual = validate(broken_geojson);
+  t.is(actual.status, EUnifiedStatus.Red)
+  t.is(actual.message, "fails schema validation")
+})
+
+test("do not fail this", (t) => {
+  t.false(!true)
+})

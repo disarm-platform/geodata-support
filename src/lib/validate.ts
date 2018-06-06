@@ -2,9 +2,9 @@ import { JSONSchema4 } from "json-schema";
 import GeojsonSchema from "./geojson.schema.json";
 import { TGeodataLayer } from "./TGeodataLayer";
 import { validate_schema } from "./validate_schema";
+import { ESchemaStatus } from "./TSchemaResponse";
 
 export function validate(geodata: TGeodataLayer): TUnifiedResponse {
-  console.log("hello!", geodata);
   if (geodata) { }
 
   //
@@ -31,6 +31,19 @@ export function validate(geodata: TGeodataLayer): TUnifiedResponse {
 
 function determine_response(schema_response, custom_responses): TUnifiedResponse {
   if (schema_response && custom_responses) { }
+
+  if (schema_response.status === ESchemaStatus.Green) {
+    return {
+      message: 'passes schema validation',
+      status: EUnifiedStatus.Green
+    }
+  } else if (schema_response.status === ESchemaStatus.Red) {
+    return {
+      message: "fails schema validation",
+      status: EUnifiedStatus.Red
+    }
+  }
+
   return {
     message: "Some message",
     status: EUnifiedStatus.Red,

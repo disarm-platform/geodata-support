@@ -11,8 +11,8 @@ export function unique_property_fields(geodata: GeoJsonFeatureCollection) {
 }
 
 enum FieldType {
-  Unknown,
-  Inconsistent
+  Unknown = 'unknown',
+  Inconsistent = 'inconsistent'
 }
 
 interface FieldDescription {
@@ -66,6 +66,11 @@ function figure_type(existing_type, new_type) {
     return existing_type
   } // If exist and new are the same, then it's consistent
 
+  if (existing_type !== new_type) {
+    return FieldType.Inconsistent
+  } // 
+  
+  return FieldType.Unknown
 
 }
 

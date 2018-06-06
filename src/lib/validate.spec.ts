@@ -2,7 +2,7 @@
 import test from "ava";
 import { EUnifiedStatus, validate } from "./validate";
 
-test("title", (t) => {
+test("passes simplest valid geojson", (t) => {
   const simplest_valid_geojson = {
     features: [],
     type: "FeatureCollection",
@@ -22,8 +22,4 @@ test("broken config", t => {
   const actual = validate(broken_geojson);
   t.is(actual.status, EUnifiedStatus.Red)
   t.is(actual.message, "fails schema validation")
-})
-
-test("do not fail this", (t) => {
-  t.false(!true)
 })

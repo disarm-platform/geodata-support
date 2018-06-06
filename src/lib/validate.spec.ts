@@ -18,7 +18,7 @@ test("broken config", t => {
     feature: [],
     type: 'Something else'
   }
-
+  // @ts-ignore
   const actual = validate(broken_geojson);
   t.is(actual.status, EUnifiedStatus.Red)
   t.is(actual.message, "fails schema validation")

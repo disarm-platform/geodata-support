@@ -1,5 +1,5 @@
 import test from "ava";
-import { GeoJsonFeatureCollection } from "./TGeoJSON";
+import { GeoJsonFeatureCollection } from "../TGeoJSON";
 import { all_property_fields, unique_property_fields, common_fields, describe_fields } from "./describe_fields";
 
 const valid_geojson_with_unique_id = {

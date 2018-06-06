@@ -1,4 +1,4 @@
-import { GeoJsonFeatureCollection } from "./TGeoJSON";
+import { GeoJsonFeatureCollection } from "../TGeoJSON";
 
 export function all_property_fields(geodata: GeoJsonFeatureCollection) {
   return geodata.features.reduce((acc, f) => {

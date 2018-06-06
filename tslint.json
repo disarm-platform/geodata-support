@@ -45,5 +45,14 @@
     ],
     "no-if-statement": true,
     /* end tslint-immutable rules */
+    "variable-name": [
+      "allow-snake-case"
+    ],
+    "no-console": false
+  },
+  "linterOptions": {
+    "exclude": [
+      "**/*.json"
+    ]
   }
 }

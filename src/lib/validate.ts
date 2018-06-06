@@ -1,10 +1,10 @@
 import { JSONSchema4 } from "json-schema";
 import GeojsonSchema from "./geojson.schema.json";
-import { TGeodataLayer } from "./TGeodataLayer";
+import { GeoJson } from "./TGeoJSON";
 import { validate_schema } from "./validate_schema";
 import { ESchemaStatus } from "./TSchemaResponse";
 
-export function validate(geodata: TGeodataLayer): TUnifiedResponse {
+export function validate(geodata: GeoJson): TUnifiedResponse {
   if (geodata) { }
 
   //

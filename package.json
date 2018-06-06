@@ -51,6 +51,9 @@
     "node": ">=8.9"
   },
   "dependencies": {
+    "@types/json-schema": "^6.0.1",
+    "ajv": "^6.5.0",
+    "json-schema": "^0.2.3",
     "sha.js": "^2.4.11"
   },
   "devDependencies": {

@@ -1,4 +1,5 @@
 import { GeoJsonFeatureCollection } from "../TGeoJSON";
+import dl from 'datalib';
 
 interface TPropertyDescription {
   name: string;
@@ -13,7 +14,8 @@ interface TProperty {
 
 export function describe_properties(geodata: GeoJsonFeatureCollection): TPropertyDescription[] {
   const properties = all_properties(geodata)
-  if(properties){}
+  const dis = dl.count.distinct(properties)
+  if(dis) {}
   return [{ name: 'id', type: 'number', on_all: true, unique: true }, { name: 'not_all', type: 'string', on_all: true, unique: true }]
 }
 
@@ -32,5 +34,4 @@ export function check_unique(acc, i) {
 
 // for current property 'i', check exists on all 
 export function exists_on_all(property, properties) {
-  
 }

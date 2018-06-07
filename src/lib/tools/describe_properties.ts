@@ -14,8 +14,12 @@ interface TProperty {
 
 export function describe_properties(geodata: GeoJsonFeatureCollection): TPropertyDescription[] {
   const properties = all_properties(geodata)
-  const dis = dl.count.distinct(properties)
-  if(dis) {}
+  let dis = dl.count.distinct(properties)
+
+  if (dis !== 1) {
+    dis = 2
+  }
+
   return [{ name: 'id', type: 'number', on_all: true, unique: true }, { name: 'not_all', type: 'string', on_all: true, unique: true }]
 }
 
@@ -25,11 +29,13 @@ export function all_properties(geodata: GeoJsonFeatureCollection) {
 
 // for current property 'i', check for consistent type against all others
 export function consistent_type(properties: TProperty[]) {
+  if (properties) { }
   return true
 }
 
 // for current property 'i', compare for uniqueness against others in 'acc'
-export function check_unique(acc, i) {
+export function check_unique(acc) {
+  if (acc) {}
 }
 
 // for current property 'i', check exists on all 

@@ -1,5 +1,5 @@
 declare module 'datalib' {
   namespace count {
-    export function distinct(string): string[];
+    export function distinct(a: boolean): number;
   }
 }

@@ -1,12 +1,26 @@
-import { JSONSchema4 } from "json-schema";
-import GeojsonSchema from "./support/geojson.schema.json";
-import { GeoJson } from "./support/TGeoJSON";
-import { ESchemaStatus } from "./TSchemaResponse";
-import { validate_schema } from "./validate_schema";
+import { JSONSchema4 } from 'json-schema';
+import { TSpatialHierarchy } from './config_types/TSpatialHierarchy';
+import GeojsonSchema from './support/geojson.schema.json';
+import { GeoJson } from './support/TGeoJSON';
+import { validate_schema } from './validate_schema';
 
+export interface TValidationResponse {
+  readonly status: EValidationStatus;
+  readonly message: string;
+  readonly support_messages?: string[];
+}
+
+export enum EValidationStatus {
+  Green = 'Green, passed schema validation',
+  Red = 'Red, failed schema validation',
+}
+
+/**
+ * Validate geodata
+ * @param {GeoJson} geodata
+ * @returns {TValidationResponse}
+ */
 export function validate(geodata: GeoJson): TValidationResponse {
-  if (geodata) { }
-
   //
   // STEP 0 - Gather what you need
   // After this step, no more data/config can be loaded
@@ -29,43 +43,14 @@ export function validate(geodata: GeoJson): TValidationResponse {
   return determine_response(schema_response, custom_responses);
 }
 
-function determine_response(schema_response, custom_responses): TValidationResponse {
-  if (schema_response && custom_responses) { }
+/**
+ * Validate `spatial_hierarchy`
+ * @param {TSpatialHierarchy} spatial_hierarchy
+ */
+export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy): TValidationResponse {
+  // Validate against schema
 
-  if (schema_response.status === ESchemaStatus.Green) {
-    return {
-      message: 'passes schema validation',
-      status: EUnifiedStatus.Green
-    }
-  } else if (schema_response.status === ESchemaStatus.Red) {
-    return {
-      message: "fails schema validation",
-      status: EUnifiedStatus.Red
-    }
-  }
-
-  return {
-    message: "Some message",
-    status: EUnifiedStatus.Red,
-  };
+  // What special things do we need to check?
+  return null
 }
 
-export interface TValidationResponse {
-  readonly status: EValidationStatus;
-  readonly message: string;
-}
-
-export enum EValidationStatus {
-  Green,
-  Red,
-}
-
-export enum EUnifiedStatus {
-  Green,
-  Red,
-}
-
-export interface TValidationResponse {
-  readonly message: string;
-  readonly status: EUnifiedStatus;
-}

@@ -3,10 +3,13 @@ import { GeoJson } from './support/TGeoJSON';
 export interface TGeodataSummary {
   metadata: {
     valid: boolean; // Whether
-  };
-  file_reference: string; // Some ref, to find file from DB
-  fields_summary: TFieldSummary[];
-  location_selection: null | TLocationSelection[]; // Is null
+  },
+  layers: [{
+    layer_name: string;
+    file_reference: string; // Some ref, to find file from DB
+    fields_summary: TFieldSummary[];
+    location_selection: null | TLocationSelection[]; // Is null
+  }]
 }
 
 export interface TFieldSummary {
@@ -23,5 +26,5 @@ export interface TLocationSelection {
 }
 
 export function process(geodata: GeoJson): TGeodataSummary {
-  return null
+  return null;
 }

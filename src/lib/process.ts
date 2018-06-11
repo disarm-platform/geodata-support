@@ -1,16 +1,19 @@
 import { TGeodataSummary } from '../../build/main/lib/process';
 import { TSpatialHierarchy } from './config_types/TSpatialHierarchy';
 import { GeoJson } from './support/TGeoJSON';
+import { validate, validate_spatial_hierarchy } from './validate';
 
 export interface TGeodataSummary {
-  layers: [{
-    layer_name: string;
-    file_reference: string; // Some ref, to find file from DB
-    fields_summary: TFieldSummary[];
-  }];
-  location_selection: null | TLocationSelection[];
+  location_selection?: TLocationSelection[];
   spatial_hierarchy: TSpatialHierarchy;
   spatial_hierarchy_valid: boolean; // Whether
+  status: EGeodataValid;
+  messages: string[];
+}
+
+enum EGeodataValid {
+  Green = 'Green, valid',
+  Red = 'Red, invalid'
 }
 
 export interface TFieldSummary {
@@ -31,10 +34,11 @@ export function process(geodata: GeoJson, spatial_hierarchy: TSpatialHierarchy):
   if (!validate(geodata)) return {} // Check we've got inputs required
 
   // internally validate spatial_hierarchy
-  if (!validate_sh(spatial_hierarchy)) return {
-    status: BrokenSH,
-    messages: ['Fix it!']
-  }
+  if (!validate_spatial_hierarchy(spatial_hierarchy)) {
+    return {
+      status: EGeodataValid.Red,
+      messages: ['Fix it!']
+    };}
 
   // is_valid_spatial_hierarchy = check TFieldSummary[] against spatial_hierarchy
 

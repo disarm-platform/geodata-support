@@ -1,23 +1,25 @@
 // tslint:disable
 import Ajv from 'ajv';
-import { ESchemaStatus, TSchemaResponse } from './TSchemaResponse';
-import { JSONSchema4 } from 'json-schema';
-import { GeoJson } from './TGeoJSON';
+import { GeoJson } from './support/TGeoJSON';
+import { EValidationStatus, TValidationResponse } from './validate';
+import GeojsonSchema from './support/geojson.schema.json';
 
 const ajv = new Ajv();
 
-export function validate_schema(config: GeoJson, config_schema: JSONSchema4): TSchemaResponse {
-  const schema_valid = ajv.validate(config_schema, config);
+export function validate_schema(config: GeoJson): TValidationResponse {
+  const geojson_schema = GeojsonSchema;
+  const schema_valid = ajv.validate(geojson_schema, config);
 
   if (schema_valid) {
     return {
-      status: ESchemaStatus.Green,
-      errors: 'Schema validation passed'
+      status: EValidationStatus.Green,
+      message: 'Schema validation passed'
     };
   } else {
     return {
-      status: ESchemaStatus.Red,
-      errors: `Schema validation errors: ${ajv.errorsText()}`
+      status: EValidationStatus.Red,
+      message: `Schema validation errors`,
+      support_messages: ajv.errors.map(e => e.message)
     };
   }
 }

@@ -1,3 +1,5 @@
+import { TGeodataSummary } from '../../build/main/lib/process';
+import { TSpatialHierarchy } from './config_types/TSpatialHierarchy';
 import { GeoJson } from './support/TGeoJSON';
 
 export interface TGeodataSummary {
@@ -15,6 +17,7 @@ export interface TGeodataSummary {
 export interface TFieldSummary {
   field_name: string,
   type: string;
+  type_is_consistent: boolean;
   exists_on_all: boolean; // Exists on every feature
   unique: boolean; // Where it exists, is it unique
 }
@@ -25,6 +28,6 @@ export interface TLocationSelection {
   category: string; // The reference to the parent/grouping object
 }
 
-export function process(geodata: GeoJson): TGeodataSummary {
+export function process(geodata: GeoJson, spatial_hierarchy: TSpatialHierarchy): TGeodataSummary {
   return null;
 }

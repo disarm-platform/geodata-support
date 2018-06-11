@@ -1,6 +1,6 @@
 import test from 'ava';
-import { all_polygons } from './all_polygons';
 import { GeoJsonFeatureCollection } from '../TGeoJSON';
+import { all_polygons } from './all_polygons';
 
 
 test('passes with only Polygons', t => {

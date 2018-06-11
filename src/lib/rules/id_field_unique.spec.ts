@@ -1,6 +1,6 @@
 import test from "ava";
-import { id_field_unique } from './id_field_unique'
 import { GeoJsonFeatureCollection } from "../TGeoJSON";
+import { id_field_unique } from './id_field_unique'
 
 /* tslint:disable */
 test('detect non-uniques', t => {

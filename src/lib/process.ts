@@ -1,8 +1,12 @@
 import { GeoJson } from './support/TGeoJSON';
 
 export interface TGeodataSummary {
-  fields_summary: TFieldSummary[],
-  location_selection: string[],
+  metadata: {
+    valid: boolean; // Whether
+  };
+  file_reference: string; // Some ref, to find file from DB
+  fields_summary: TFieldSummary[];
+  location_selection: null | TLocationSelection[]; // Is null
 }
 
 export interface TFieldSummary {
@@ -12,7 +16,12 @@ export interface TFieldSummary {
   unique: boolean; // Where it exists, is it unique
 }
 
+export interface TLocationSelection {
+  id: string | number;
+  name: string;
+  category: string; // The reference to the parent/grouping object
+}
+
 export function process(geodata: GeoJson): TGeodataSummary {
-  if (geodata) {};
-  return {} as TGeodataSummary
+  return null
 }

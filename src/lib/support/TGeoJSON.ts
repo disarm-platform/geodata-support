@@ -53,13 +53,13 @@ export interface GeoJsonMultiPolygon {
 }
 export interface GeoJsonGeometryCollection {
   type: string;
-  geometries: (
+  geometries: Array<
     | GeoJsonPoint1
     | GeoJsonLineString1
     | GeoJsonPolygon1
     | GeoJsonMultiPoint1
     | GeoJsonMultiLineString1
-    | GeoJsonMultiPolygon1)[];
+    | GeoJsonMultiPolygon1>;
   bbox?: number[];
   [k: string]: any;
 }
@@ -154,13 +154,13 @@ export interface GeoJsonMultiPolygon2 {
 }
 export interface GeoJsonGeometryCollection1 {
   type: string;
-  geometries: (
+  geometries: Array<
     | GeoJsonPoint3
     | GeoJsonLineString3
     | GeoJsonPolygon3
     | GeoJsonMultiPoint3
     | GeoJsonMultiLineString3
-    | GeoJsonMultiPolygon3)[];
+    | GeoJsonMultiPolygon3>;
   bbox?: number[];
   [k: string]: any;
 }
@@ -261,13 +261,13 @@ export interface GeoJsonMultiPolygon4 {
 }
 export interface GeoJsonGeometryCollection2 {
   type: string;
-  geometries: (
+  geometries: Array<
     | GeoJsonPoint5
     | GeoJsonLineString5
     | GeoJsonPolygon5
     | GeoJsonMultiPoint5
     | GeoJsonMultiLineString5
-    | GeoJsonMultiPolygon5)[];
+    | GeoJsonMultiPolygon5>;
   bbox?: number[];
   [k: string]: any;
 }

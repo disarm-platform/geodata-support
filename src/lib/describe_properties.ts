@@ -14,7 +14,7 @@ interface TProperty {
 
 export function describe_properties(geodata: GeoJsonFeatureCollection): TPropertyDescription[] {
   const properties = all_properties(geodata)
-  let dis = dl.count.distinct(properties)
+  const dis = dl.count.distinct(properties)
 
   if (dis !== 1) {
     dis = 2

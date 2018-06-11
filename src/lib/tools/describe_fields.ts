@@ -27,7 +27,7 @@ interface FieldDescription {
 export function describe_fields(geodata: GeoJsonFeatureCollection, fields: string[]): FieldDescription[] {
   const features = geodata.features
 
-  let result: FieldDescription[] = fields.map(field => {
+  const result: FieldDescription[] = fields.map(field => {
     return {
       name: field,
       type: FieldType.Unknown,
@@ -37,7 +37,7 @@ export function describe_fields(geodata: GeoJsonFeatureCollection, fields: strin
 
   fields.forEach(field => {
     features.forEach(feature => {
-      let found = result.find(r => r.name === field)
+      const found = result.find(r => r.name === field)
       
       const new_value = feature.properties[field]
       const new_type = new_value ? typeof new_value : FieldType.Unknown

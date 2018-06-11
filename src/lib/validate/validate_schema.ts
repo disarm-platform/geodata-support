@@ -1,8 +1,7 @@
-// tslint:disable
 import Ajv from 'ajv';
-import { GeoJson } from './support/TGeoJSON';
-import { EValidationStatus, TValidationResponse } from './validate';
-import GeojsonSchema from './support/geojson.schema.json';
+import GeojsonSchema from '../support/geojson.schema.json';
+import { GeoJson } from '../support/TGeoJSON';
+import { EValidationStatus, TValidationResponse } from './TValidationResponse';
 
 const ajv = new Ajv();
 

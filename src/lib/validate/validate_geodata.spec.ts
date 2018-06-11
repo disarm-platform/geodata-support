@@ -1,6 +1,6 @@
 /* tslint:disable */
 import test from "ava";
-import { EValidationStatus, validate } from "./validate";
+import { EValidationStatus, validate_geodata } from "./validate_geodata";
 
 test("passes simplest valid geojson", (t) => {
   const simplest_valid_geojson = {
@@ -8,7 +8,7 @@ test("passes simplest valid geojson", (t) => {
     type: "FeatureCollection",
   };
 
-  const actual = validate(simplest_valid_geojson);
+  const actual = validate_geodata(simplest_valid_geojson);
   t.is(actual.status, EValidationStatus.Green);
   t.is(actual.message, "passes schema validation");
 });
@@ -19,7 +19,7 @@ test("broken config", t => {
     type: 'Something else'
   }
   // @ts-ignore
-  const actual = validate(broken_geojson);
+  const actual = validate_geodata(broken_geojson);
   t.is(actual.status, EValidationStatus.Red)
   t.is(actual.message, "fails schema validation")
 })

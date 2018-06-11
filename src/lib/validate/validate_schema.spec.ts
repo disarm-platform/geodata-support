@@ -1,6 +1,6 @@
 import test from 'ava';
-import { EValidationStatus } from './validate';
 import { validate_schema } from './validate_schema';
+import { EValidationStatus } from './TValidationResponse';
 
 test('validation passes with simplest valid geojson', t => {
   const simplest_valid_geojson = {

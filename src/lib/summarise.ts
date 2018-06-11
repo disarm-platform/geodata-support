@@ -1,6 +1,6 @@
 import { TFieldSummary } from './process';
 import { GeoJson } from './support/TGeoJSON';
-import { validate } from './validate';
+import { validate_geodata } from './validate/validate_geodata';
 
 export interface TLayerSummary {
   layer_name: string;
@@ -9,7 +9,7 @@ export interface TLayerSummary {
 }
 
 export function summarise(geodata: GeoJson): TLayerSummary[] {
-  if (!validate(geodata)) return {}; // Check we've got inputs required
+  if (!validate_geodata(geodata)) return {}; // Check we've got inputs required
   // do "field analysis" of geodata and get back TFieldSummary[] for each layer
   return {
     layers_summary,

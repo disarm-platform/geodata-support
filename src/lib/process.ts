@@ -1,7 +1,7 @@
 import { TGeodataSummary } from '../../build/main/lib/process';
 import { TSpatialHierarchy } from './config_types/TSpatialHierarchy';
 import { GeoJson } from './support/TGeoJSON';
-import { validate, validate_spatial_hierarchy } from './validate';
+import { validate_geodata, validate_spatial_hierarchy } from './validate/validate_geodata';
 
 export interface TGeodataSummary {
   location_selection?: TLocationSelection[];
@@ -31,7 +31,7 @@ export interface TLocationSelection {
 }
 
 export function process(geodata: GeoJson, spatial_hierarchy: TSpatialHierarchy): TGeodataSummary {
-  if (!validate(geodata)) return {} // Check we've got inputs required
+  if (!validate_geodata(geodata)) return {} // Check we've got inputs required
 
   // internally validate spatial_hierarchy
   if (!validate_spatial_hierarchy(spatial_hierarchy)) {

@@ -43,7 +43,7 @@
         ]
       }
     ],
-    "no-if-statement": true,
+//    "no-if-statement": true,
     /* end tslint-immutable rules */
     "variable-name": [
       "allow-snake-case"

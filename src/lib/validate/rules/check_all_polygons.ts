@@ -1,4 +1,4 @@
-import { GeoJsonFeatureCollection } from "../support/TGeoJSON";
+import { GeoJsonFeatureCollection } from "../../../config_types/TGeoJSON";
 
 // Geodata contains only Polygons, no MultiPolygons, Lines, Points, etc
 export function check_all_polygons(geodata: GeoJsonFeatureCollection): boolean{

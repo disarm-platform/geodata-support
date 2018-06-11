@@ -1,4 +1,4 @@
-import { GeoJsonFeatureCollection } from '../support/TGeoJSON'
+import { GeoJsonFeatureCollection } from '../../../config_types/TGeoJSON'
 
 // Given ID field must be unique
 export function id_field_unique(geodata: GeoJsonFeatureCollection, id_field: string): boolean {

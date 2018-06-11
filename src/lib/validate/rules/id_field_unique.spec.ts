@@ -1,5 +1,5 @@
 import test from "ava";
-import { GeoJsonFeatureCollection } from "../support/TGeoJSON";
+import { GeoJsonFeatureCollection } from "../../../config_types/TGeoJSON";
 import { id_field_unique } from './id_field_unique'
 
 /* tslint:disable */

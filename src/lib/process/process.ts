@@ -1,5 +1,5 @@
-import { TSpatialHierarchy } from './config_types/TSpatialHierarchy';
-import { GeoJson } from './support/TGeoJSON';
+import { GeoJson } from '../../config_types/TGeoJSON';
+import { TSpatialHierarchy } from '../../config_types/TSpatialHierarchy';
 
 export interface TGeodataSummary {
   location_selection?: TLocationSelection[];
@@ -42,5 +42,5 @@ export function process(_geodata: GeoJson, _spatial_hierarchy: TSpatialHierarchy
   //   status,
   //   messages
   // }
-  return {} as TGeodataSummary
+  return {} as TGeodataSummary;
 }

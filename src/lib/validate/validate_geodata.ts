@@ -1,5 +1,5 @@
-import { check_all_polygons } from '../rules/check_all_polygons';
-import { GeoJsonFeatureCollection } from '../support/TGeoJSON';
+import { check_all_polygons } from './rules/check_all_polygons';
+import { GeoJsonFeatureCollection } from '../../config_types/TGeoJSON';
 import { EValidationStatus, TValidationResponse } from './TValidationResponse';
 import { validate_schema } from './validate_schema';
 

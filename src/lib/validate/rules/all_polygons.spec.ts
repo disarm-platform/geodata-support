@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
-import { GeoJsonFeatureCollection } from '../support/TGeoJSON';
+import { GeoJsonFeatureCollection } from '../../../config_types/TGeoJSON';
 import { check_all_polygons } from './check_all_polygons';
 
 

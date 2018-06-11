@@ -1,6 +1,6 @@
 import Ajv from 'ajv';
-import GeojsonSchema from '../support/geojson.schema.json';
-import { GeoJson } from '../support/TGeoJSON';
+import GeojsonSchema from '../../config_types/geojson.schema.json';
+import { GeoJson } from '../../config_types/TGeoJSON';
 import { EValidationStatus, TValidationResponse } from './TValidationResponse';
 
 const ajv = new Ajv();

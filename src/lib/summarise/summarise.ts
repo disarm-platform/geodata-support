@@ -1,7 +1,7 @@
-import { TFieldSummary } from './process';
-import { GeoJsonFeatureCollection } from './support/TGeoJSON';
-import { validate_geodata } from './validate';
-import { EValidationStatus } from './validate/TValidationResponse';
+import { TFieldSummary } from '../process/process';
+import { GeoJsonFeatureCollection } from '../../config_types/TGeoJSON';
+import { validate_geodata } from '../validate/index';
+import { EValidationStatus } from '../validate/TValidationResponse';
 
 export interface TLayerSummary {
   layer_name?: string;

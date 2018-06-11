@@ -1,7 +1,7 @@
 /* tslint:disable */
 import test from "ava";
 import { describe_properties } from "./describe_properties";
-import { GeoJsonFeatureCollection } from "./support/TGeoJSON";
+import { GeoJsonFeatureCollection } from "../../config_types/TGeoJSON";
 
 
 // const valid_geojson_with_unique_id = {

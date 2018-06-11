@@ -1,5 +1,5 @@
 // import dl from 'datalib';
-import { GeoJsonFeatureCollection } from "./support/TGeoJSON";
+import { GeoJsonFeatureCollection } from "../../config_types/TGeoJSON";
 
 interface TPropertyDescription {
   name: string;

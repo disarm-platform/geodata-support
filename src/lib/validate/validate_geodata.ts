@@ -4,7 +4,8 @@ import { EValidationStatus, TValidationResponse } from './TValidationResponse';
 import { validate_schema } from './validate_schema';
 
 /**
- * Validate geodata
+ * Validate geodata against the GeoJSON schema and 
+ * the custom rules (e.g. only Polygons)
  * @param {GeoJson} geodata
  * @returns {TValidationResponse}
  */

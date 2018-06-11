@@ -5,9 +5,16 @@ import { EValidationStatus, TValidationResponse } from './TValidationResponse';
 
 const ajv = new Ajv();
 
-export function validate_schema(config: GeoJson): TValidationResponse {
+/**
+ * Check if given geodata is valid GeoJSON
+ *
+ * @export
+ * @param {GeoJson} geodata
+ * @returns {TValidationResponse}
+ */
+export function validate_schema(geodata: GeoJson): TValidationResponse {
   const geojson_schema = GeojsonSchema;
-  const schema_valid = ajv.validate(geojson_schema, config);
+  const schema_valid = ajv.validate(geojson_schema, geodata);
 
   if (schema_valid) {
     return {

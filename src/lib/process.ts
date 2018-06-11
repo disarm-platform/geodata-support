@@ -3,15 +3,14 @@ import { TSpatialHierarchy } from './config_types/TSpatialHierarchy';
 import { GeoJson } from './support/TGeoJSON';
 
 export interface TGeodataSummary {
-  metadata: {
-    valid: boolean; // Whether
-  },
   layers: [{
     layer_name: string;
     file_reference: string; // Some ref, to find file from DB
     fields_summary: TFieldSummary[];
-    location_selection: null | TLocationSelection[]; // Is null
-  }]
+  }];
+  location_selection: null | TLocationSelection[];
+  spatial_hierarchy: TSpatialHierarchy;
+  spatial_hierarchy_valid: boolean; // Whether
 }
 
 export interface TFieldSummary {
@@ -28,6 +27,45 @@ export interface TLocationSelection {
   category: string; // The reference to the parent/grouping object
 }
 
+function validate(geodata: GeoJson) {
+  // internally validate geodata, is GeoJSON.FeatureCollection
+
+  // check if geodata is Polygons only
+  
+  return {
+    status,
+    messages
+  }
+}
+
+export function summarise(geodata: GeoJson): TLayersSummary {
+  if (!validate(geodata)) return {} // Check we've got inputs required
+  // do "field analysis" of geodata and get back TFieldSummary[] for each layer
+  return {
+    layers_summary,
+    status,
+    messages
+  }
+}
+
 export function process(geodata: GeoJson, spatial_hierarchy: TSpatialHierarchy): TGeodataSummary {
-  return null;
+  if (!validate(geodata)) return {} // Check we've got inputs required
+
+  // internally validate spatial_hierarchy
+  if (!validate_sh(spatial_hierarchy)) return {
+    status: BrokenSH,
+    messages: ['Fix it!']
+  }
+
+  // is_valid_spatial_hierarchy = check TFieldSummary[] against spatial_hierarchy
+
+  // if spatial_hierarchy is valid against TFieldSummary[]
+  // generate location_selection
+
+  return {
+    location_selection, // optionally
+    spatial_hierarchy,
+    status,
+    messages
+  }
 }

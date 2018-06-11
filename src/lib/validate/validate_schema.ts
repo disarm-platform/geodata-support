@@ -11,13 +11,13 @@ export function validate_schema(config: GeoJson): TValidationResponse {
 
   if (schema_valid) {
     return {
+      message: 'Schema validation passed',
       status: EValidationStatus.Green,
-      message: 'Schema validation passed'
     };
   } else {
     return {
-      status: EValidationStatus.Red,
       message: `Schema validation errors`,
+      status: EValidationStatus.Red,
       support_messages: ajv.errors.map(e => e.message)
     };
   }

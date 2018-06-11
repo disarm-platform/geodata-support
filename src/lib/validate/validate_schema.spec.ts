@@ -1,6 +1,7 @@
+// tslint:disable:no-expression-statement
 import test from 'ava';
-import { validate_schema } from './validate_schema';
 import { EValidationStatus } from './TValidationResponse';
+import { validate_schema } from './validate_schema';
 
 test('validation passes with simplest valid geojson', t => {
   const simplest_valid_geojson = {
@@ -19,6 +20,7 @@ test('must have a type', t => {
     features: []
   };
 
+  // @ts-ignore
   const actual = validate_schema(simplest_valid_geojson);
   const expected = EValidationStatus.Red;
 
@@ -30,6 +32,7 @@ test('must have a features', t => {
     type: 'FeatureCollection'
   };
 
+  // @ts-ignore
   const actual = validate_schema(simplest_valid_geojson);
   const expected = EValidationStatus.Red;
 

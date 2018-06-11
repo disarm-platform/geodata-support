@@ -11,7 +11,7 @@ test('passes simplest valid geojson', (t) => {
 
   const actual = validate_geodata(simplest_valid_geojson);
   t.is(actual.status, EValidationStatus.Green);
-  t.is(actual.message, 'passes schema validation');
+  t.is(actual.message, 'Geodata is valid against schema and custom rules');
 });
 
 test('broken config', t => {
@@ -22,6 +22,6 @@ test('broken config', t => {
   // @ts-ignore
   const actual = validate_geodata(broken_geojson);
   t.is(actual.status, EValidationStatus.Red);
-  t.is(actual.message, 'fails schema validation');
+  t.is(actual.message, 'Geodata has invalid schema');
 });
 

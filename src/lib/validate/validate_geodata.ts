@@ -12,11 +12,18 @@ export function validate_geodata(geodata: GeoJsonFeatureCollection): TValidation
   // Basic schema check
   const schema_is_valid = validate_schema(geodata).status === EValidationStatus.Green;
 
-  // More specific rules
+  if (!schema_is_valid) {
+    return {
+      message: 'Geodata has invalid schema',
+      status: EValidationStatus.Red
+    }
+  }
+
+  // More specific rules, only run on a valid schema
   // Check all Features are Polygons
   const custom_rules_passed = check_all_polygons(geodata);
 
-  if (schema_is_valid && custom_rules_passed) {
+  if (custom_rules_passed) {
     return {
       message: "Geodata is valid against schema and custom rules",
       status: EValidationStatus.Green,

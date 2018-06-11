@@ -68,7 +68,6 @@ test('describe fields with inconsistent types', t => {
   } as GeoJsonFeatureCollection;
   const fields = common_fields(geojson_with_inconsistent_types);
   const actual = describe_fields(geojson_with_inconsistent_types, fields)
-  console.log(actual)
   const expected = [{name: 'id', type: 'inconsistent', count: 2}]
   t.deepEqual(actual, expected)
 })

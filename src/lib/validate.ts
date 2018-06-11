@@ -1,6 +1,6 @@
 import { JSONSchema4 } from "json-schema";
-import GeojsonSchema from "./geojson.schema.json";
-import { GeoJson } from "./TGeoJSON";
+import GeojsonSchema from "./support/geojson.schema.json";
+import { GeoJson } from "./support/TGeoJSON";
 import { validate_schema } from "./validate_schema";
 import { ESchemaStatus } from "./TSchemaResponse";
 

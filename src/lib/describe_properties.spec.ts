@@ -1,6 +1,6 @@
 /* tslint:disable */
 import test from "ava";
-import { all_properties, describe_properties } from "./describe_properties";
+import { describe_properties } from "./describe_properties";
 import { GeoJsonFeatureCollection } from "./support/TGeoJSON";
 
 
@@ -33,9 +33,9 @@ test('less basic', t => {
   t.deepEqual(actual, expected);
 });
 
-
-test('all properties', t => {
-  const actual = all_properties(valid_geojson_with_unique_id)
-  const expected = [{ id: 1, not_all: "value" }, { id: 2 }]
-  t.deepEqual(actual, expected);
-});
+//
+// test('all properties', t => {
+//   const actual = all_properties(valid_geojson_with_unique_id)
+//   const expected = [{ id: 1, not_all: "value" }, { id: 2 }]
+//   t.deepEqual(actual, expected);
+// });

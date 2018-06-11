@@ -1,7 +1,5 @@
-import { TGeodataSummary } from '../../build/main/lib/process';
 import { TSpatialHierarchy } from './config_types/TSpatialHierarchy';
 import { GeoJson } from './support/TGeoJSON';
-import { validate_geodata, validate_spatial_hierarchy } from './validate/validate_geodata';
 
 export interface TGeodataSummary {
   location_selection?: TLocationSelection[];
@@ -30,25 +28,19 @@ export interface TLocationSelection {
   category: string; // The reference to the parent/grouping object
 }
 
-export function process(geodata: GeoJson, spatial_hierarchy: TSpatialHierarchy): TGeodataSummary {
-  if (!validate_geodata(geodata)) return {} // Check we've got inputs required
-
-  // internally validate spatial_hierarchy
-  if (!validate_spatial_hierarchy(spatial_hierarchy)) {
-    return {
-      status: EGeodataValid.Red,
-      messages: ['Fix it!']
-    };}
+export function process(_geodata: GeoJson, _spatial_hierarchy: TSpatialHierarchy): TGeodataSummary {
+  // if (!validate_geodata(geodata)) return {} // Check we've got inputs required
 
   // is_valid_spatial_hierarchy = check TFieldSummary[] against spatial_hierarchy
 
   // if spatial_hierarchy is valid against TFieldSummary[]
   // generate location_selection
 
-  return {
-    location_selection, // optionally
-    spatial_hierarchy,
-    status,
-    messages
-  }
+  // return {
+  //   location_selection, // optionally
+  //   spatial_hierarchy,
+  //   status,
+  //   messages
+  // }
+  return {} as TGeodataSummary
 }

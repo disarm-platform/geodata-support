@@ -1,19 +1,32 @@
 import { TFieldSummary } from './process';
-import { GeoJson } from './support/TGeoJSON';
-import { validate_geodata } from './validate/validate_geodata';
+import { GeoJsonFeatureCollection } from './support/TGeoJSON';
+import { validate_geodata } from './validate';
+import { EValidationStatus } from './validate/TValidationResponse';
 
 export interface TLayerSummary {
-  layer_name: string;
-  file_reference: string; // Some ref, to find file from DB
-  fields_summary: TFieldSummary[];
+  layer_name?: string;
+  file_reference?: string; // Some ref, to find file from DB
+  fields_summary?: TFieldSummary[];
+  status: EValidationStatus;
+  message: string;
 }
 
-export function summarise(geodata: GeoJson): TLayerSummary[] {
-  if (!validate_geodata(geodata)) return {}; // Check we've got inputs required
+export function summarise(geodata: GeoJsonFeatureCollection): TLayerSummary {
+
+  const valid = validate_geodata(geodata);
+
+  if (valid.status === EValidationStatus.Red) {
+    return valid;
+  } else {
+    return {
+      message: 'Something else',
+      status: EValidationStatus.Green
+    };
+  } // Check we've got inputs required
   // do "field analysis" of geodata and get back TFieldSummary[] for each layer
-  return {
-    layers_summary,
-    status,
-    messages
-  };
+  // return {
+  //   layers_summary,
+  //   status,
+  //   messages
+  // };
 }

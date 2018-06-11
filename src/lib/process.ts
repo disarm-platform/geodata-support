@@ -27,27 +27,6 @@ export interface TLocationSelection {
   category: string; // The reference to the parent/grouping object
 }
 
-function validate(geodata: GeoJson) {
-  // internally validate geodata, is GeoJSON.FeatureCollection
-
-  // check if geodata is Polygons only
-  
-  return {
-    status,
-    messages
-  }
-}
-
-export function summarise(geodata: GeoJson): TLayersSummary {
-  if (!validate(geodata)) return {} // Check we've got inputs required
-  // do "field analysis" of geodata and get back TFieldSummary[] for each layer
-  return {
-    layers_summary,
-    status,
-    messages
-  }
-}
-
 export function process(geodata: GeoJson, spatial_hierarchy: TSpatialHierarchy): TGeodataSummary {
   if (!validate(geodata)) return {} // Check we've got inputs required
 

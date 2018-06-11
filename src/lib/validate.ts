@@ -4,7 +4,7 @@ import { GeoJson } from "./support/TGeoJSON";
 import { ESchemaStatus } from "./TSchemaResponse";
 import { validate_schema } from "./validate_schema";
 
-export function validate(geodata: GeoJson): TUnifiedResponse {
+export function validate(geodata: GeoJson): TValidationResponse {
   if (geodata) { }
 
   //
@@ -29,7 +29,7 @@ export function validate(geodata: GeoJson): TUnifiedResponse {
   return determine_response(schema_response, custom_responses);
 }
 
-function determine_response(schema_response, custom_responses): TUnifiedResponse {
+function determine_response(schema_response, custom_responses): TValidationResponse {
   if (schema_response && custom_responses) { }
 
   if (schema_response.status === ESchemaStatus.Green) {
@@ -65,7 +65,7 @@ export enum EUnifiedStatus {
   Red,
 }
 
-export interface TUnifiedResponse {
+export interface TValidationResponse {
   readonly message: string;
   readonly status: EUnifiedStatus;
 }

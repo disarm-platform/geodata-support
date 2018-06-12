@@ -26,7 +26,7 @@ test('broken config', t => {
   t.is(actual.message, 'Geodata has invalid schema');
 });
 
-test('break the uniqueID rule', t => {
+test('ignore unique_id rule - not part of this validation step', t => {
   const non_unique_ids = {
     "type": "FeatureCollection",
     "features": [
@@ -100,7 +100,7 @@ test('break the uniqueID rule', t => {
   } as GeoJsonFeatureCollection
 
   const actual = validate_geodata_layer(non_unique_ids);
-  const expected = EValidationStatus.Red;
+  const expected = EValidationStatus.Green;
 
   t.is(actual.status, expected);
 })

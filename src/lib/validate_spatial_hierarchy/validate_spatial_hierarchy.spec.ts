@@ -77,3 +77,39 @@ test('simple geodata and spatial_hierarchy but with some NotPolygons', t => {
   t.is(actual.status, expected.status);
   t.is(actual.message, expected.message);
 });
+
+test('valid geodata, but fields in sh not found in geodata', t => {
+  const geodata: TGeodata = {
+    villages: {
+      'type': 'FeatureCollection',
+      'features': [
+        { ...base_feature, properties: { id: 1 } }
+      ]
+    } as TGeodataLayer
+  };
+  const spatial_hierarchy: TSpatialHierarchy = {
+    data_version: 0,
+    markers: {
+      planning_level_name: 'level',
+      record_location_selection_level_name: 'level',
+      denominator_fields: {
+        field1: 'field1'
+      }
+    },
+    levels: [
+      {
+        name: 'villages',
+        field_name: 'other_id',
+        display_field_name: 'other_id'
+      }
+    ]
+  };
+  const actual = validate_spatial_hierarchy(spatial_hierarchy, geodata);
+  const expected = {
+    message: 'Some fields missing from the level definition',
+    status: EValidationStatus.Red
+  } as TValidationResponse;
+  t.is(actual.status, expected.status);
+  t.is(actual.message, expected.message);
+});
+

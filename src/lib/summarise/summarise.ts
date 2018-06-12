@@ -1,8 +1,8 @@
 import { TGeodataLayer } from '../../config_types/TGeodata';
-import { unique_on_all } from '../helpers/unique_on_all';
-import { exists_on_all_features } from '../helpers/exists_on_all';
-import { unique_fields } from '../helpers/unique_fields';
-import { get_type } from '../helpers/get_type';
+import { unique_on_all } from '../helpy/unique_on_all';
+import { exists_on_all_features } from '../helpy/exists_on_all';
+import { unique_fields } from '../helpy/unique_fields';
+import { get_type } from '../helpy/get_type';
 
 export enum EFieldType {
   NotSet = 'NotSet', // Initial value

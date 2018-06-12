@@ -1,9 +1,5 @@
-import { check_all_polygons } from './rules/check_all_polygons';
-import { GeoJsonFeatureCollection } from '../../config_types/TGeoJSON';
 import { EValidationStatus, TValidationResponse } from '../../config_types/TValidationResponse';
 import { validate_layer_schema } from '../validate_geodata/validate_layer_schema';
-import { id_field_unique } from './rules/id_field_unique';
-import { TSpatialHierarchy } from '../../config_types/TSpatialHierarchy';
 import { TGeodataLayer } from '../../config_types/TGeodata';
 
 /**
@@ -26,8 +22,8 @@ export function validate_geodata_layer(layer: TGeodataLayer): TValidationRespons
 
   // More specific rules, only run on a valid schema
   // Check all Features are Polygons
-  const id_field = spatial_hierarchy.levels[0].field_name; // TODO: Yup, this is wrong
-  const custom_rules_passed = check_all_polygons(layer) && id_field_unique(layer, id_field);
+  // const id_field = spatial_hierarchy.levels[0].field_name; // TODO: Yup, this is wrong
+  const custom_rules_passed = true // check_all_polygons(layer) && id_field_unique(layer, id_field);
 
   if (custom_rules_passed) {
     return {

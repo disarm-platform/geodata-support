@@ -3,14 +3,6 @@ import test from 'ava';
 import { validate_geodata_layer } from './validate_geodata_layer';
 import { EValidationStatus } from '../../config_types/TValidationResponse';
 import { GeoJsonFeatureCollection } from '../../config_types/TGeoJSON';
-import { TSpatialHierarchy } from '../../config_types/TSpatialHierarchy';
-
-const base_spatial_hierarchy = {
-  levels: [{field_name: 'id'}], 
-  markers: {planning_level_name: 'x', record_location_selection_level_name: 'x'}, 
-  data_version: 0
-} as TSpatialHierarchy
-
 
 test('passes simplest valid geojson', (t) => {
   const simplest_valid_geojson = {
@@ -18,7 +10,7 @@ test('passes simplest valid geojson', (t) => {
     type: 'FeatureCollection'
   };
 
-  const actual = validate_geodata_layer(simplest_valid_geojson, base_spatial_hierarchy);
+  const actual = validate_geodata_layer(simplest_valid_geojson);
   t.is(actual.status, EValidationStatus.Green);
   t.is(actual.message, 'Geodata is valid against schema and custom rules');
 });
@@ -29,7 +21,7 @@ test('broken config', t => {
     type: 'Something else'
   };
   // @ts-ignore
-  const actual = validate_geodata_layer(broken_geojson, base_spatial_hierarchy);
+  const actual = validate_geodata_layer(broken_geojson);
   t.is(actual.status, EValidationStatus.Red);
   t.is(actual.message, 'Geodata has invalid schema');
 });
@@ -107,7 +99,7 @@ test('break the uniqueID rule', t => {
     ]
   } as GeoJsonFeatureCollection
 
-  const actual = validate_geodata_layer(non_unique_ids, base_spatial_hierarchy);
+  const actual = validate_geodata_layer(non_unique_ids);
   const expected = EValidationStatus.Red;
 
   t.is(actual.status, expected);

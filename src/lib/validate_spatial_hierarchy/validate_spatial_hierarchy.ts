@@ -60,6 +60,7 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
     status: EValidationStatus.Green
   }
   // TODO: `markers` properties are valid
+
   // TODO: planning_level_name is a level
   // TODO: record_location_selection_level_name is a level
   // TODO: denominator_fields exist on the planning_level_name level
@@ -68,12 +69,11 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
   // TODO: The given ID fields are unique, exist on all features, and are of consistent type
   // unique_on_all()
   
-
-
   return {
     message: 'Invalid spatial_hierarchy',
     status: EValidationStatus.Red,
     support_messages: ['a']
   };
 }
+
 

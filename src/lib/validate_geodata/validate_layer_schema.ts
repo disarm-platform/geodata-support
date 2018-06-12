@@ -6,7 +6,7 @@ import { EValidationStatus, TValidationResponse } from '../../config_types/TVali
 const ajv = new Ajv();
 
 /**
- * Check if given geodata is valid GeoJSON
+ * Check if given geodata is a valid GeoJSON FeatureCollection
  * @param {TGeodataLayer} layer
  * @returns {TValidationResponse}
  */

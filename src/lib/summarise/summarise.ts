@@ -1,8 +1,7 @@
 import { GeoJsonFeatureCollection } from '../../config_types/TGeoJSON';
 import { TSpatialHierarchy } from '../../config_types/TSpatialHierarchy';
-import { TFieldSummary } from '../process/process';
-import { validate_geodata } from '../validate';
-import { EValidationStatus } from "../validate/TValidationResponse";
+import { validate_geodata_layer } from '../validate_geodata';
+import { EValidationStatus } from "../../config_types/TValidationResponse";
 
 export interface TLayerSummary {
   layer_name: string;
@@ -12,7 +11,7 @@ export interface TLayerSummary {
 
 export function summarise(geodata: GeoJsonFeatureCollection): TLayerSummary[] {
 
-  const valid = validate_geodata(geodata);
+  const valid = validate_geodata_layer(geodata);
 
   if (valid.status === EValidationStatus.Red) {
     return valid;

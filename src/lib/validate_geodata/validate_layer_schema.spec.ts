@@ -1,7 +1,7 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
-import { EValidationStatus } from './TValidationResponse';
-import { validate_schema } from './validate_schema';
+import { EValidationStatus } from '../../config_types/TValidationResponse';
+import { validate_layer_schema } from './validate_layer_schema';
 
 test('validation passes with simplest valid geojson', t => {
   const simplest_valid_geojson = {
@@ -9,7 +9,7 @@ test('validation passes with simplest valid geojson', t => {
     type: 'FeatureCollection'
   };
 
-  const actual = validate_schema(simplest_valid_geojson);
+  const actual = validate_layer_schema(simplest_valid_geojson);
   const expected = EValidationStatus.Green;
 
   t.deepEqual(actual.status, expected);
@@ -21,7 +21,7 @@ test('must have a type', t => {
   };
 
   // @ts-ignore
-  const actual = validate_schema(simplest_valid_geojson);
+  const actual = validate_layer_schema(simplest_valid_geojson);
   const expected = EValidationStatus.Red;
 
   t.is(actual.status, expected);
@@ -33,7 +33,7 @@ test('must have a features', t => {
   };
 
   // @ts-ignore
-  const actual = validate_schema(simplest_valid_geojson);
+  const actual = validate_layer_schema(simplest_valid_geojson);
   const expected = EValidationStatus.Red;
 
   t.is(actual.status, expected);

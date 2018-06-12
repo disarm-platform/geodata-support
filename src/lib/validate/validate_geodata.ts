@@ -6,12 +6,11 @@ import { id_field_unique } from './rules/id_field_unique';
 import { TSpatialHierarchy } from '../../config_types/TSpatialHierarchy';
 
 /**
- * Validate geodata against the GeoJSON schema and 
- * the custom rules (e.g. only Polygons)
+ * Validate geodata against the GeoJSON schema
  * @param {GeoJson} geodata
  * @returns {TValidationResponse}
  */
-export function validate_geodata(geodata: GeoJsonFeatureCollection, spatial_hierarchy: TSpatialHierarchy): TValidationResponse {
+export function validate_geodata(geodata: GeoJsonFeatureCollection): TValidationResponse {
   // Basic schema check
   const schema_is_valid = validate_schema(geodata).status === EValidationStatus.Green;
 

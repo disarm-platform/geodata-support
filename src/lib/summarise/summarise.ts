@@ -5,14 +5,12 @@ import { validate_geodata } from '../validate';
 import { EValidationStatus } from "../validate/TValidationResponse";
 
 export interface TLayerSummary {
-  layer_name?: string;
+  layer_name: string;
   file_reference?: string; // Some ref, to find file from DB
   fields_summary?: TFieldSummary[];
-  status: EValidationStatus;
-  message: string;
 }
 
-export function summarise(geodata: GeoJsonFeatureCollection): TLayerSummary {
+export function summarise(geodata: GeoJsonFeatureCollection): TLayerSummary[] {
 
   const valid = validate_geodata(geodata);
 

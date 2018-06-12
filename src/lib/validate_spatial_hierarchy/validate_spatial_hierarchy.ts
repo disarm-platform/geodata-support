@@ -55,13 +55,15 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
     };
   }
 
-  // `markers` propertiers are valid
-  // planning_level_name is a level
-  // record_location_selection_level_name is a level
-  // denominator_fields exist on the planning_level_name level
+  // TODO: `markers` propertiers are valid
+  // TODO: planning_level_name is a level
+  // TODO: record_location_selection_level_name is a level
+  // TODO: denominator_fields exist on the planning_level_name level
 
 
-  // Given ID fields are unique, exist on all features, and are of consistent type
+  // TODO: The given ID fields are unique, exist on all features, and are of consistent type
+
+  
 
 
   return {

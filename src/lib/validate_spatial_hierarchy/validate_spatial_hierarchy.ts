@@ -1,8 +1,9 @@
 import { flatten } from 'lodash';
-import { TGeodata } from '../../config_types/TGeodata';
+import { TGeodata, TGeodataLayer } from '../../config_types/TGeodata';
 import { TSpatialHierarchy } from '../../config_types/TSpatialHierarchy';
 import { EValidationStatus, TValidationResponse } from '../../config_types/TValidationResponse';
 import { validate_layer_schema } from '../validate_geodata';
+import { check_layers_and_levels } from './check_layers_and_levels';
 
 /**
  * Confirm that the given spatial_hierarchy config object is valid against the given array of geodata layers.
@@ -13,9 +14,13 @@ import { validate_layer_schema } from '../validate_geodata';
  * @returns {TValidationResponse}
  */
 export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy, geodata: TGeodata): TValidationResponse {
-  // Every geodata layer is valid
-  const validated_layers = Object.keys(geodata).map(layer_name => {
-    return validate_layer_schema(geodata[layer_name]);
+  const geodata_layer_names = Object.keys(geodata)
+  const sh_level_names = spatial_hierarchy.levels.map(level => level.name)
+
+  // Check every geodata layer is valid, and return early if not
+  const validated_layers = geodata_layer_names.map(layer_name => {
+    const layer = geodata[layer_name]
+    return validate_layer_schema(layer);
   });
 
   if (!validated_layers.every(l => l.status === EValidationStatus.Green)) {
@@ -27,23 +32,11 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
     };
   }
 
-  // Every spatial_hierarchy level exists in geodata
-  const level_names = spatial_hierarchy.levels.map(level => level.name)
 
-  if (!level_names.every(l => Object.keys(geodata).includes(l))) {
-    return {
-      message: 'Missing some levels from geodata',
-      status: EValidationStatus.Red,
-      support_messages: ['Name the problem levels']
-    }
-  }
-
-  if (!Object.keys(geodata).every(k => level_names.includes((k)))) {
-    return {
-      message: 'Missing some geodata from levels',
-      status: EValidationStatus.Red,
-      support_messages: ['Name the problem levels']
-    }
+  // Check every spatial_hierarchy level exists in geodata, return early
+  const layers_and_levels = check_layers_and_levels(geodata_layer_names, sh_level_names)
+  if (layers_and_levels.status === EValidationStatus.Red) {
+    return layers_and_levels
   }
 
   // Every property given in spatial_hierarchy level exists in the geodata
@@ -64,4 +57,8 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
     status: EValidationStatus.Red,
     support_messages: ['a']
   };
+}
+
+export function validate_layer(layer_name: string, spatial_hierarchy: TSpatialHierarchy, layer: TGeodataLayer): TValidationResponse {
+
 }

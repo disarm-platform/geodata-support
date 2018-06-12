@@ -14,8 +14,9 @@ const ajv = new Ajv();
  */
 export function validate_layer_schema(layer: TGeodataLayer): TValidationResponse {
   const geojson_schema = GeojsonSchema;
-  const schema_valid = ajv.validate(geojson_schema, layer);
 
+  // Basic checks for validity
+  const schema_valid = ajv.validate(geojson_schema, layer);
   const checked_all_polygons = all_polygons(layer);
 
   if (schema_valid && checked_all_polygons) {
@@ -25,7 +26,13 @@ export function validate_layer_schema(layer: TGeodataLayer): TValidationResponse
     }
   } else if (schema_valid && !checked_all_polygons) {
     return {
-      message: "Schema"
+      message: "Schema passed, but not all features are Polygons",
+      status: EValidationStatus.Red
+    }
+  } else if (!schema_valid && checked_all_polygons) {
+    return {
+      message: 'Schema validation failed, but all features are Polygons',
+      status: EValidationStatus.Red
     }
   } else {
     return {

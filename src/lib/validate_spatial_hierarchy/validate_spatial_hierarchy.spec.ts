@@ -44,11 +44,11 @@ test('simple valid geodata and spatial_hierarchy', t => {
 
 test('simple geodata and spatial_hierarchy but with some NotPolygons', t => {
   const geodata: TGeodata = {
-  // @ts-ignore
+    // @ts-ignore
     villages: {
       'type': 'FeatureCollection',
       'features': [
-        { ...base_feature, properties: { id: 1 }, geometry: {type: 'Point', coordinates: [0,0]} }
+        { ...base_feature, properties: { id: 1 }, geometry: { type: 'Point', coordinates: [0, 0] } }
       ]
     } as TGeodataLayer
   };

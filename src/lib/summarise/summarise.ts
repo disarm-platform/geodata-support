@@ -1,30 +1,29 @@
-import { GeoJsonFeatureCollection } from '../../config_types/TGeoJSON';
-import { TSpatialHierarchy } from '../../config_types/TSpatialHierarchy';
-import { validate_geodata_layer } from '../validate_geodata';
-import { EValidationStatus } from "../../config_types/TValidationResponse";
+import { flatten, uniq } from 'lodash';
+import { TGeodataLayer } from '../../config_types/TGeodata';
 
-export interface TLayerSummary {
-  layer_name: string;
-  file_reference?: string; // Some ref, to find file from DB
-  fields_summary?: TFieldSummary[];
+export interface TFieldSummary {
+  field_name: string;
+  type: string;
+  exists_on_all: boolean;
+  consistent_type: boolean; // Cannot be true unless also `exists_on_all`
+  unique: boolean;
 }
 
-export function summarise(geodata: GeoJsonFeatureCollection): TLayerSummary[] {
+export function summarise(layer: TGeodataLayer): TFieldSummary[] {
+  const all_properties = layer.features.map(f => f.properties);
 
-  const valid = validate_geodata_layer(geodata);
+  // Get all unique fields from all properties
+  unique_fields(all_properties);
 
-  if (valid.status === EValidationStatus.Red) {
-    return valid;
-  } else {
-    return {
-      message: 'Something else',
-      status: EValidationStatus.Green
-    };
-  } // Check we've got inputs required
-  // do "field analysis" of geodata and get back TFieldSummary[] for each layer
-  // return {
-  //   layers_summary,
-  //   status,
-  //   messages
-  // };
+  // Check if exist on all features
+
+  // Check if unique on all features
+
+  // Get type and check if consistent on all features
+
+  // Figure out how to describe, and return
+}
+
+export function unique_fields(properties_array): string[] {
+  return uniq(flatten(properties_array.map(p => Object.keys(p))));
 }

@@ -39,3 +39,13 @@ test('must have a features', t => {
   t.is(actual.status, expected);
 });
 
+test('broken geojson', t => {
+  const broken_geojson = {
+    feature: [],
+    type: 'Something else'
+  };
+  // @ts-ignore
+  const actual = validate_layer_schema(broken_geojson);
+  t.is(actual.status, EValidationStatus.Red);
+  t.is(actual.message, 'Schema validation errors');
+});

@@ -21,7 +21,7 @@ export function validate_layer_schema(layer: TGeodataLayer): TValidationResponse
     };
   } else {
     return {
-      message: `Schema validation errors`,
+      message: 'Schema validation errors',
       status: EValidationStatus.Red,
       support_messages: ajv.errors.map(e => e.message)
     };

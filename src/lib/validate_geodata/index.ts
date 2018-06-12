@@ -1,1 +1,1 @@
-export { validate_geodata_layer } from '../validate_spatial_hierarchy/validate_geodata_layer';
+export { validate_layer_schema } from './validate_layer_schema';

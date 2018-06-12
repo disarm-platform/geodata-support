@@ -23,13 +23,12 @@ export function validate_layer_schema(layer: TGeodataLayer): TValidationResponse
     return {
       message: 'Schema validation passed and all polygons',
       status: EValidationStatus.Green,
-      support_messages: ['a']
     }
   } else if (schema_valid && !checked_all_polygons) {
     return {
       message: "Schema passed, but not all features are Polygons",
       status: EValidationStatus.Red,
-      support_messages: ['b']
+      support_messages: ['Not all Features are Polygons']
     }
   } else if (!schema_valid && checked_all_polygons) {
     return {
@@ -41,7 +40,7 @@ export function validate_layer_schema(layer: TGeodataLayer): TValidationResponse
     return {
       message: 'Schema validation errors',
       status: EValidationStatus.Red,
-      support_messages: ajv.errors.map(e => e.message)
+      support_messages: [ajv.errorsText()]
     };
   }
 }

@@ -28,7 +28,7 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
   if (!validated_layers.every(l => l.status === EValidationStatus.Green)) {
     const support_messages = flatten(validated_layers.map(v => v.support_messages));
     return {
-      message: 'Some layers are not valid geodata',
+      message: 'Some layers are not valid geodata: either schema failed or some Features are not Polygons',
       status: EValidationStatus.Red,
       support_messages
     };

@@ -43,6 +43,7 @@
         ]
       }
     ],
+    "object-literal-sort-keys": false,
 //    "no-if-statement": true,
     /* end tslint-immutable rules */
     "variable-name": [

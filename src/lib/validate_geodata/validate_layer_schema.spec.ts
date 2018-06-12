@@ -1,8 +1,8 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
+import { TGeodataLayer } from '../../config_types/TGeodata';
 import { EValidationStatus } from '../../config_types/TValidationResponse';
 import { validate_layer_schema } from './validate_layer_schema';
-import { TGeodataLayer } from '../../config_types/TGeodata';
 
 const base_feature = {properties: {}, type: 'Feature',geometry: {type: 'Polygon', coordinates: [[[0,0],[0,0]]]}};
 

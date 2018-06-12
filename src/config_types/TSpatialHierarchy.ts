@@ -17,9 +17,9 @@ export interface TMarkers {
 }
 
 export interface TLevel {
-  group_by_field?: string;
-  field_name: string;
-  display_field_name: string;
-  name: string;
+  name: string; // Name of the level
+  field_name: string; // Exists on this level
+  display_field_name: string; // Only for display, can be same as `field_name`
+  group_by_field?: string; // Exists on this level
 }
 

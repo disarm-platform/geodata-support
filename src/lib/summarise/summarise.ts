@@ -29,7 +29,7 @@ export function summarise(layer: TGeodataLayer): TFieldSummary[] {
   // Iterate the fields
   return fields.map(field_name => {
     return {
-      field_name: field_name,
+      field_name,
       // Check if exist on all features
       exists_on_all: exists_on_all_features(field_name, all_properties),
       unique: unique_on_all(field_name, all_properties),

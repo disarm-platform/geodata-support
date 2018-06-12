@@ -1,5 +1,5 @@
 import { flatten } from 'lodash';
-import { TGeodata, TGeodataLayer } from '../../config_types/TGeodata';
+import { TGeodata } from '../../config_types/TGeodata';
 import { TSpatialHierarchy } from '../../config_types/TSpatialHierarchy';
 import { EValidationStatus, TValidationResponse } from '../../config_types/TValidationResponse';
 import { validate_layer_schema } from '../validate_geodata';
@@ -40,7 +40,6 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
   }
 
   // Every property given in spatial_hierarchy level exists in the geodata
-  // const level_field_names = ["group_by_field", "field_name", "display_field_name"];
 
   // `markers` propertiers are valid
   // planning_level_name is a level
@@ -59,6 +58,3 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
   };
 }
 
-export function validate_layer(layer_name: string, spatial_hierarchy: TSpatialHierarchy, layer: TGeodataLayer): TValidationResponse {
-
-}

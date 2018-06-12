@@ -4,7 +4,6 @@ import { EValidationStatus, TValidationResponse } from '../../config_types/TVali
 import { TFieldSummary } from '../summarise/summarise';
 
 export function required_properties_on_sh_level(spatial_hierarchy_level: TLevel, geodata_properties_summary: TFieldSummary[]): TValidationResponse {
-
   const required_fields = ['group_by_field', 'field_name']
     .map(n => get(spatial_hierarchy_level, n))
     .filter(i => i);

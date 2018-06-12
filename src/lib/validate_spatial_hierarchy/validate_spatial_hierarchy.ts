@@ -4,6 +4,8 @@ import { TSpatialHierarchy } from '../../config_types/TSpatialHierarchy';
 import { EValidationStatus, TValidationResponse } from '../../config_types/TValidationResponse';
 import { validate_layer_schema } from '../validate_geodata';
 import { check_layers_and_levels } from './check_layers_and_levels';
+import { required_properties_on_sh_level } from './required_properties_on_sh_level';
+import { summarise } from '../summarise';
 
 /**
  * Confirm that the given spatial_hierarchy config object is valid against the given array of geodata layers.
@@ -14,17 +16,17 @@ import { check_layers_and_levels } from './check_layers_and_levels';
  * @returns {TValidationResponse}
  */
 export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy, geodata: TGeodata): TValidationResponse {
-  const geodata_layer_names = Object.keys(geodata)
-  const sh_level_names = spatial_hierarchy.levels.map(level => level.name)
+  const geodata_layer_names = Object.keys(geodata);
+  const sh_level_names = spatial_hierarchy.levels.map(level => level.name);
 
   // Check every geodata layer is valid, and return early if not
   const validated_layers = geodata_layer_names.map(layer_name => {
-    const layer = geodata[layer_name]
+    const layer = geodata[layer_name];
     return validate_layer_schema(layer);
   });
 
   if (!validated_layers.every(l => l.status === EValidationStatus.Green)) {
-    const support_messages = flatten(validated_layers.map(l => l.support_messages));
+    const support_messages = flatten(validated_layers.map(v => v.support_messages));
     return {
       message: 'Some layers are not valid geodata',
       status: EValidationStatus.Red,
@@ -32,14 +34,26 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
     };
   }
 
-
   // Check every spatial_hierarchy level exists in geodata, return early
-  const layers_and_levels = check_layers_and_levels(geodata_layer_names, sh_level_names)
+  const layers_and_levels = check_layers_and_levels(geodata_layer_names, sh_level_names);
   if (layers_and_levels.status === EValidationStatus.Red) {
-    return layers_and_levels
+    return layers_and_levels;
   }
 
   // Every property given in spatial_hierarchy level exists in the geodata
+  const required_properties_on_all_levels = spatial_hierarchy.levels.map(level => {
+    const fields_summary = summarise(geodata[level.name]);
+    return required_properties_on_sh_level(level, fields_summary);
+  });
+
+  if (!required_properties_on_all_levels.every(l => l.status === EValidationStatus.Green)) {
+    const support_messages = flatten(required_properties_on_all_levels.map(v => v.support_messages));
+    return {
+      message: 'Some fields missing from the level definition',
+      status: EValidationStatus.Red,
+      support_messages
+    };
+  }
 
   // `markers` propertiers are valid
   // planning_level_name is a level
@@ -48,7 +62,6 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
 
 
   // Given ID fields are unique, exist on all features, and are of consistent type
-
 
 
   return {

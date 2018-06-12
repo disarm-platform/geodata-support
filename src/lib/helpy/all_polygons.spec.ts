@@ -1,7 +1,7 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
-import { GeoJsonFeatureCollection } from '../../../config_types/TGeoJSON';
-import { check_all_polygons } from './check_all_polygons';
+import { GeoJsonFeatureCollection } from '../../config_types/TGeoJSON';
+import { all_polygons } from './all_polygons';
 
 
 test('passes with only Polygons', t => {
@@ -13,7 +13,7 @@ test('passes with only Polygons', t => {
     ]
   } as GeoJsonFeatureCollection;
   
-  const actual = check_all_polygons(geojson)
+  const actual = all_polygons(geojson)
   const expected = true
   t.is(actual, expected)
 });
@@ -28,7 +28,7 @@ test('no Lines allowed', t => {
     ]
   } as GeoJsonFeatureCollection;
   
-  const actual = check_all_polygons(geojson_with_line)
+  const actual = all_polygons(geojson_with_line)
   const expected = false
   t.is(actual, expected)
 });
@@ -43,7 +43,7 @@ test('no Points allowed', t => {
     ]
   } as GeoJsonFeatureCollection;
   
-  const actual = check_all_polygons(geojson_with_point)
+  const actual = all_polygons(geojson_with_point)
   const expected = false
   t.is(actual, expected)
 });
@@ -58,7 +58,7 @@ test('no MultiPolygons allowed', t => {
     ]
   } as GeoJsonFeatureCollection;
   
-  const actual = check_all_polygons(geojson_with_multipolygon)
+  const actual = all_polygons(geojson_with_multipolygon)
   const expected = false
   t.is(actual, expected)
 });

@@ -2,5 +2,5 @@
 import test from 'ava'
 
 test('empty, pointless', t => {
-  t.is(true, true)
+  t.is(true, false)
 })

@@ -14,12 +14,12 @@ import { validate_layer_schema } from '../validate_geodata';
  */
 export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy, geodata: TGeodata): TValidationResponse {
   // Every geodata layer is valid
-  const validate_layers = Object.keys(geodata).map(layer_name => {
+  const validated_layers = Object.keys(geodata).map(layer_name => {
     return validate_layer_schema(geodata[layer_name]);
   });
 
-  if (!validate_layers.every(l => l.status === EValidationStatus.Green)) {
-    const support_messages = flatten(validate_layers.map(l => l.support_messages));
+  if (!validated_layers.every(l => l.status === EValidationStatus.Green)) {
+    const support_messages = flatten(validated_layers.map(l => l.support_messages));
     return {
       message: 'Some layers are not valid geodata',
       status: EValidationStatus.Red,

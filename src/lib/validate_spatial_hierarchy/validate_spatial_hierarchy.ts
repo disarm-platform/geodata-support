@@ -6,6 +6,7 @@ import { summarise } from '../summarise';
 import { validate_layer_schema } from '../validate_geodata';
 import { check_layers_and_levels } from './check_layers_and_levels';
 import { required_properties_on_sh_level } from './required_properties_on_sh_level';
+import { summarise_all_levels } from './summarise_all_levels';
 
 /**
  * Confirm that the given spatial_hierarchy config object is valid against the given array of geodata layers.
@@ -60,6 +61,7 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
     status: EValidationStatus.Green
   }
   // TODO: `markers` properties are valid
+  const summary = summarise_all_levels(geodata);
 
   // TODO: planning_level_name is a level
   // TODO: record_location_selection_level_name is a level

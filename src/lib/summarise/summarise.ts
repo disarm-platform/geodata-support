@@ -49,21 +49,18 @@ export function exists_on_all_features(field_name, properties_array): boolean {
 }
 
 export function unique_on_all(field_name, properties_array): boolean {
-  const features_where_found = properties_array.filter(properties => {
-    return has(properties, field_name)
-  })
+  const features = features_where_found(field_name, properties_array);
 
-  const unique_values = [...new Set(features_where_found.map(p => get(p, field_name)))].filter(i => i);
-  return unique_values.length === features_where_found.length;
+  const unique_values = [...new Set(features.map(p => get(p, field_name)))].filter(i => i);
+  return unique_values.length === features.length;
 }
 
 export function get_type(field_name, properties_array): EFieldType {
+  const features = features_where_found(field_name, properties_array);
 
-  return properties_array.filter(properties => {
-    return has(properties, field_name)
-  }).reduce((existing_type, properties) => {
+  return features.reduce((existing_type, properties) => {
     let current_type: EFieldType;
-    const type = typeof get(properties, field_name)
+    const type = typeof get(properties, field_name);
 
     switch (type) {
       case 'string':
@@ -91,4 +88,8 @@ export function get_type(field_name, properties_array): EFieldType {
     return current_type;
 
   }, EFieldType.NotSet);
+}
+
+function features_where_found(field_name, properties_array) {
+  return properties_array.filter(properties => has(properties, field_name))
 }

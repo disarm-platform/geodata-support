@@ -3,9 +3,9 @@ import test from 'ava';
 import { TGeodataLayer } from '../../config_types/TGeodata';
 import { EFieldType, summarise, TFieldSummary } from './summarise';
 
+const base_feature = {properties: {}, type: 'Feature',geometry: {type: 'Polygon', coordinates: [[[0,0],[0,0]]]}}
 
 test('has unique id field', t => {
-  const base_feature = {properties: {}, type: 'Feature',geometry: {type: 'Polygon', coordinates: [[[0,0],[0,0]]]}}
   const geodata_layer = {type: 'FeatureCollection', features: [
     {...base_feature, properties: {id: 1}},
     {...base_feature, properties: {id: 2}}
@@ -22,7 +22,6 @@ test('has unique id field', t => {
 })
 
 test('inconsistent id field', t => {
-  const base_feature = {properties: {}, type: 'Feature',geometry: {type: 'Polygon', coordinates: [[[0,0],[0,0]]]}}
   const geodata_layer = {type: 'FeatureCollection', features: [
     {...base_feature, properties: {id: 1}},
     {...base_feature, properties: {id: '2'}}
@@ -39,7 +38,6 @@ test('inconsistent id field', t => {
 })
 
 test('inconsistent and missing id field', t => {
-  const base_feature = {properties: {}, type: 'Feature',geometry: {type: 'Polygon', coordinates: [[[0,0],[0,0]]]}}
   const geodata_layer = {type: 'FeatureCollection', features: [
     {...base_feature, properties: {id: 1}},
     {...base_feature, properties: {id: '2'}},
@@ -58,7 +56,6 @@ test('inconsistent and missing id field', t => {
 })
 
 test('id field not on all, but unique where exists', t => {
-  const base_feature = {properties: {}, type: 'Feature',geometry: {type: 'Polygon', coordinates: [[[0,0],[0,0]]]}}
   const geodata_layer = {type: 'FeatureCollection', features: [
     {...base_feature, properties: {id: 1}},
     {...base_feature, properties: {other_id: 2}}
@@ -80,7 +77,6 @@ test('id field not on all, but unique where exists', t => {
 })
 
 test('id field includes unknown type (e.g. function)', t => {
-  const base_feature = {properties: {}, type: 'Feature',geometry: {type: 'Polygon', coordinates: [[[0,0],[0,0]]]}}
   const geodata_layer = {type: 'FeatureCollection', features: [
     {...base_feature, properties: {id: 1}},
     {...base_feature, properties: {id: function(){}}}

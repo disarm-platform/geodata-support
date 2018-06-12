@@ -1,6 +1,7 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
-import { EFieldType, get_type } from './summarise';
+import { EFieldType} from '../summarise/summarise';
+import { get_type } from './get_type';
 
 test('consistent number type', t => {
   const properties_array = [{id: 1}, {id: 2}];

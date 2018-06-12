@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
-import { exists_on_all_features } from './summarise';
+import { exists_on_all_features } from './exists_on_all';
 
 test('does exist on all', t => {
   const properties_array = [{id: 1}, {id: 2}];

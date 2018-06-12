@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
-import { unique_fields } from './summarise';
+import { unique_fields } from './unique_fields';
 
 test('simple unique fields', t => {
   const properties_array = [{ id: 1 }, { id: 2 }];

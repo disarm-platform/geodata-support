@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
-import { unique_on_all } from './summarise';
+import { unique_on_all } from './unique_on_all';
 
 test('is unique on all', t => {
   const properties_array = [{id: 1}, {id: 2}];

@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import test from "ava";
-import { GeoJsonFeatureCollection } from "../../../config_types/TGeoJSON";
+import { GeoJsonFeatureCollection } from "../../config_types/TGeoJSON";
 import { all_property_fields, common_fields, describe_fields, unique_property_fields } from "./describe_fields";
 
 const valid_geojson_with_unique_id = {

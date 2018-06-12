@@ -9,8 +9,6 @@ export enum EFieldType {
   Unreliable = 'Unreliable',
 }
 
-// export type EFieldTypeR = 'string' | 'number' | 'boolean' | 'inconsistent';
-
 export interface TFieldSummary {
   field_name: string;
   exists_on_all: boolean;

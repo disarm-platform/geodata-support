@@ -9,6 +9,8 @@ export enum EFieldType {
   Unreliable = 'Unreliable',
 }
 
+// export type EFieldTypeR = 'string' | 'number' | 'boolean' | 'inconsistent';
+
 export interface TFieldSummary {
   field_name: string;
   exists_on_all: boolean;
@@ -47,8 +49,12 @@ export function exists_on_all_features(field_name, properties_array): boolean {
 }
 
 export function unique_on_all(field_name, properties_array): boolean {
-  const unique_values = [...new Set(properties_array.map(p => get(p, field_name)))];
-  return unique_values.length === properties_array.length;
+  const features_where_found = properties_array.filter(properties => {
+    return has(properties, field_name)
+  })
+
+  const unique_values = [...new Set(features_where_found.map(p => get(p, field_name)))].filter(i => i);
+  return unique_values.length === features_where_found.length;
 }
 
 export function get_type(field_name, properties_array): EFieldType {

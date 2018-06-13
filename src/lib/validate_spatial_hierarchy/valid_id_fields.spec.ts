@@ -6,9 +6,35 @@ import { EValidationStatus } from '../../config_types/TValidationResponse';
 import { valid_id_fields } from './valid_id_fields';
 
 test('basic', t => {
-  const sh = {} as TSpatialHierarchy;
-  const summary = {} as TGeodataSummary;
-  const actual = valid_id_fields(sh, summary);
-  const expected = [EValidationStatus.Green]
-  t.is(actual.map(a => a.status), expected)
+  const sh: TSpatialHierarchy = {
+    data_version: 0,
+    levels: [
+      {
+        name: 'villages',
+        field_name: 'id',
+        display_field_name: 'id'
+      }
+    ],
+    markers: {
+      planning_level_name: 'villages',
+      record_location_selection_level_name: 'villages',
+      denominator_fields: {
+        denominator_fields1: 'id'
+      }
+    }
+  };
+
+  const summary: TGeodataSummary = {
+    villages: [
+      {
+        field_name: 'id',
+        exists_on_all: true,
+        unique: true,
+        type: EFieldType.Number
+      }
+    ]
+  };
+  const actual = valid_id_fields(sh, summary).map(a => a.status);
+  const expected = [EValidationStatus.Green];
+  t.deepEqual(actual, expected);
 });

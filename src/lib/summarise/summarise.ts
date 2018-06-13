@@ -1,5 +1,5 @@
 import { TGeodataLayer } from '../../config_types/TGeodata';
-import { TFieldSummary } from '../../config_types/TSummary';
+import { TFieldSummary } from '../../config_types/TGeodataSummary';
 import { exists_on_all_features } from '../helpy/exists_on_all';
 import { get_type } from '../helpy/get_type';
 import { unique_fields } from '../helpy/unique_fields';

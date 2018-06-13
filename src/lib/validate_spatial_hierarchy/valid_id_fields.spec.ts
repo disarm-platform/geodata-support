@@ -1,9 +1,9 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
+import { EFieldType, TGeodataSummary } from '../../config_types/TGeodataSummary';
 import { TSpatialHierarchy } from '../../config_types/TSpatialHierarchy';
-import { TGeodataSummary } from '../../config_types/TSummary';
-import { valid_id_fields } from './valid_id_fields';
 import { EValidationStatus } from '../../config_types/TValidationResponse';
+import { valid_id_fields } from './valid_id_fields';
 
 test('basic', t => {
   const sh = {} as TSpatialHierarchy;

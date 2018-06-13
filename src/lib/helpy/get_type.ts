@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import { EFieldType} from '../../config_types/TSummary';
+import { EFieldType} from '../../config_types/TGeodataSummary';
 import { features_where_found } from './features_where_found';
 
 export function get_type(field_name, properties_array): EFieldType {

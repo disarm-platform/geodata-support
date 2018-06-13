@@ -1,7 +1,7 @@
 import { flatten, get } from 'lodash';
 import { TLevel } from '../../config_types/TSpatialHierarchy';
 import { EValidationStatus, TValidationResponse } from '../../config_types/TValidationResponse';
-import { TFieldSummary } from '../../config_types/TSummary';
+import { TFieldSummary } from '../../config_types/TGeodataSummary';
 
 export function required_properties_on_sh_level(spatial_hierarchy_level: TLevel, geodata_properties_summary: TFieldSummary[]): TValidationResponse {
   const required_fields = ['group_by_field', 'field_name']

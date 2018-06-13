@@ -2,7 +2,7 @@
 import test from 'ava';
 import { TGeodataLayer } from '../../config_types/TGeodata';
 import { summarise} from './summarise';
-import { EFieldType, TFieldSummary } from '../../config_types/TSummary';
+import { EFieldType, TFieldSummary } from '../../config_types/TGeodataSummary';
 
 const base_feature = { properties: {}, type: 'Feature', geometry: { type: 'Polygon', coordinates: [[[0, 0], [0, 0]]] } }
 

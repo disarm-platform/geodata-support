@@ -1,6 +1,6 @@
 import { TValidationResponse, EValidationStatus } from "../../config_types/TValidationResponse";
 import { TSpatialHierarchy } from "../../config_types/TSpatialHierarchy";
-import { TGeodataSummary } from "../../config_types/TSummary";
+import { TGeodataSummary } from "../../config_types/TGeodataSummary";
 
 
 export function markers_valid(spatial_hierarchy: TSpatialHierarchy, geodata_summary: TGeodataSummary): TValidationResponse {

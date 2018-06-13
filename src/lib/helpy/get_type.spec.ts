@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
-import { EFieldType} from '../../config_types/TSummary';
+import { EFieldType} from '../../config_types/TGeodataSummary';
 import { get_type } from './get_type';
 
 test('consistent number type', t => {

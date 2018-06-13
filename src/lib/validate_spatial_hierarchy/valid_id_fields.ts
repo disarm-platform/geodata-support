@@ -1,7 +1,7 @@
 import { TValidationResponse, EValidationStatus } from "../../config_types/TValidationResponse";
 import { TSpatialHierarchy } from "../../config_types/TSpatialHierarchy";
-import { EFieldType, TGeodataSummary } from '../../config_types/TSummary';
-import { TFieldSummary} from "../../config_types/TSummary";
+import { EFieldType, TGeodataSummary } from '../../config_types/TGeodataSummary';
+import { TFieldSummary} from "../../config_types/TGeodataSummary";
 
 export function valid_id_fields(spatial_hierarchy: TSpatialHierarchy, geodata_summary: TGeodataSummary): TValidationResponse[] {
   return spatial_hierarchy.levels.map(level => {

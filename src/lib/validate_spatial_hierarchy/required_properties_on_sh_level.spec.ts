@@ -2,8 +2,9 @@
 import test from 'ava';
 import { TLevel } from '../../config_types/TSpatialHierarchy';
 import { EValidationStatus } from '../../config_types/TValidationResponse';
-import { EFieldType, TFieldSummary } from '../summarise/summarise';
+import { TFieldSummary } from '../../config_types/TSummary';
 import { required_properties_on_sh_level } from './required_properties_on_sh_level';
+import { EFieldType } from '../../config_types/TSummary';
 
 test('basic', t => {
   const sh_level: TLevel = {

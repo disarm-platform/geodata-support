@@ -1,8 +1,5 @@
-import { summarise, TFieldSummary } from "../summarise/summarise";
-
-export interface TGeodataSummary {
-  [k: string]: TFieldSummary[]
-}
+import { TGeodataSummary } from '../../config_types/TSummary';
+import { summarise } from '../summarise/summarise';
 
 export function summarise_all_levels(geodata): TGeodataSummary {
   return Object.keys(geodata).reduce((acc, name) => {

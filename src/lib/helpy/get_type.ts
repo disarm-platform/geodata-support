@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-import { EFieldType} from '../summarise/summarise';
+import { EFieldType} from '../../config_types/TSummary';
 import { features_where_found } from './features_where_found';
 
 export function get_type(field_name, properties_array): EFieldType {

@@ -1,7 +1,8 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
 import { TGeodataLayer } from '../../config_types/TGeodata';
-import { EFieldType, summarise, TFieldSummary } from './summarise';
+import { summarise} from './summarise';
+import { EFieldType, TFieldSummary } from '../../config_types/TSummary';
 
 const base_feature = { properties: {}, type: 'Feature', geometry: { type: 'Polygon', coordinates: [[[0, 0], [0, 0]]] } }
 

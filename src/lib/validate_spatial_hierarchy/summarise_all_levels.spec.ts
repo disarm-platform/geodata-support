@@ -1,7 +1,7 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
 import { summarise_all_levels } from './summarise_all_levels';
-import { EFieldType } from '../summarise/summarise';
+import { EFieldType } from '../../config_types/TSummary';
 import { TGeodataLayer, TGeodata } from '../../config_types/TGeodata';
 
 const base_feature = {

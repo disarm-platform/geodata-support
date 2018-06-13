@@ -3,8 +3,8 @@ import test from 'ava';
 import { TSpatialHierarchy } from '../../config_types/TSpatialHierarchy';
 import { EValidationStatus } from '../../config_types/TValidationResponse';
 import { markers_valid } from './markers_valid';
-import { EFieldType } from '../summarise/summarise';
-import { TGeodataSummary } from './summarise_all_levels';
+import { EFieldType } from '../../config_types/TSummary';
+import { TGeodataSummary } from '../../config_types/TSummary';
 
 test('planning_level_name is a level in geodata', t => {
   const geodata_summary = {

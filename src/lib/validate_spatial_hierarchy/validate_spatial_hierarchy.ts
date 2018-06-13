@@ -11,7 +11,7 @@ import { markers_valid } from './markers_valid';
 import { valid_id_fields } from './valid_id_fields';
 
 /**
- * Confirm that the given spatial_hierarchy config object is valid against the given array of geodata layers.
+ * Confirm that the given spatial_hierarchy config object is valid against the given geodata layers.
  * For example, that the fields exist, that all layers contain only polygons, and that id fields are unique, exist on
  * all features and have consistent type.
  * @param {TSpatialHierarchy} spatial_hierarchy
@@ -69,7 +69,6 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
       support_messages: markers_are_valid.support_messages
     };
   }
-  
   
   return {
     message: 'Incomplete tests',

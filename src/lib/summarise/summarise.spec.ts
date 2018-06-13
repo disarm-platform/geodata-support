@@ -3,13 +3,15 @@ import test from 'ava';
 import { TGeodataLayer } from '../../config_types/TGeodata';
 import { EFieldType, summarise, TFieldSummary } from './summarise';
 
-const base_feature = {properties: {}, type: 'Feature',geometry: {type: 'Polygon', coordinates: [[[0,0],[0,0]]]}}
+const base_feature = { properties: {}, type: 'Feature', geometry: { type: 'Polygon', coordinates: [[[0, 0], [0, 0]]] } }
 
 test('has unique id field', t => {
-  const geodata_layer = {type: 'FeatureCollection', features: [
-    {...base_feature, properties: {id: 1}},
-    {...base_feature, properties: {id: 2}}
-  ]} as TGeodataLayer
+  const geodata_layer = {
+    type: 'FeatureCollection', features: [
+      { ...base_feature, properties: { id: 1 } },
+      { ...base_feature, properties: { id: 2 } }
+    ]
+  } as TGeodataLayer
   const actual = summarise(geodata_layer)
   const expected = [{
     field_name: 'id',
@@ -22,10 +24,12 @@ test('has unique id field', t => {
 })
 
 test('inconsistent id field', t => {
-  const geodata_layer = {type: 'FeatureCollection', features: [
-    {...base_feature, properties: {id: 1}},
-    {...base_feature, properties: {id: '2'}}
-  ]} as TGeodataLayer
+  const geodata_layer = {
+    type: 'FeatureCollection', features: [
+      { ...base_feature, properties: { id: 1 } },
+      { ...base_feature, properties: { id: '2' } }
+    ]
+  } as TGeodataLayer
   const actual = summarise(geodata_layer)
   const expected = [{
     field_name: 'id',
@@ -38,11 +42,13 @@ test('inconsistent id field', t => {
 })
 
 test('inconsistent and missing id field', t => {
-  const geodata_layer = {type: 'FeatureCollection', features: [
-    {...base_feature, properties: {id: 1}},
-    {...base_feature, properties: {id: '2'}},
-    {...base_feature, properties: {}}
-  ]} as TGeodataLayer
+  const geodata_layer = {
+    type: 'FeatureCollection', features: [
+      { ...base_feature, properties: { id: 1 } },
+      { ...base_feature, properties: { id: '2' } },
+      { ...base_feature, properties: {} }
+    ]
+  } as TGeodataLayer
 
   const actual = summarise(geodata_layer)
   const expected = [{
@@ -56,10 +62,12 @@ test('inconsistent and missing id field', t => {
 })
 
 test('id field not on all, but unique where exists', t => {
-  const geodata_layer = {type: 'FeatureCollection', features: [
-    {...base_feature, properties: {id: 1}},
-    {...base_feature, properties: {other_id: 2}}
-  ]} as TGeodataLayer
+  const geodata_layer = {
+    type: 'FeatureCollection', features: [
+      { ...base_feature, properties: { id: 1 } },
+      { ...base_feature, properties: { other_id: 2 } }
+    ]
+  } as TGeodataLayer
   const actual = summarise(geodata_layer)
   const expected = [{
     field_name: 'id',
@@ -77,10 +85,12 @@ test('id field not on all, but unique where exists', t => {
 })
 
 test('id field includes unknown type (e.g. function)', t => {
-  const geodata_layer = {type: 'FeatureCollection', features: [
-    {...base_feature, properties: {id: 1}},
-    {...base_feature, properties: {id: function(){}}}
-  ]} as TGeodataLayer
+  const geodata_layer = {
+    type: 'FeatureCollection', features: [
+      { ...base_feature, properties: { id: 1 } },
+      { ...base_feature, properties: { id: function () { } } }
+    ]
+  } as TGeodataLayer
   const actual = summarise(geodata_layer)
   const expected = [{
     field_name: 'id',
@@ -91,3 +101,10 @@ test('id field includes unknown type (e.g. function)', t => {
 
   t.deepEqual(actual, expected)
 })
+
+test('can summarise empty layers', t => {
+  const geodata_layer = { type: 'FeatureCollection', features: [] };
+  const actual = summarise(geodata_layer);
+  const expected = [];
+  t.deepEqual(actual, expected);
+});

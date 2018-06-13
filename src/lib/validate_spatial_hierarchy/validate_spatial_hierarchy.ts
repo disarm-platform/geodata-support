@@ -8,6 +8,7 @@ import { check_layers_and_levels } from './check_layers_and_levels';
 import { required_properties_on_sh_level } from './required_properties_on_sh_level';
 import { summarise_all_levels } from './summarise_all_levels';
 import { markers_valid } from './markers_valid';
+import { valid_id_fields } from './valid_id_fields';
 
 /**
  * Confirm that the given spatial_hierarchy config object is valid against the given array of geodata layers.
@@ -56,10 +57,10 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
       support_messages
     };
   }
+  const geodata_summary = summarise_all_levels(geodata)
 
   // Check `markers` properties are valid
-  const summary = summarise_all_levels(geodata)
-  const markers_are_valid = markers_valid(spatial_hierarchy, summary);
+  const markers_are_valid = markers_valid(spatial_hierarchy, geodata_summary);
   
   if (markers_are_valid.status !== EValidationStatus.Green) {
     return {
@@ -75,12 +76,20 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
     status: EValidationStatus.Green
   }
   
-  // TODO: The given ID fields are unique, exist on all features, and are of consistent type
-  // unique_on_all()
-  
+  // The given ID fields are unique, exist on all features, and are of consistent type
+  const id_fields_are_valid = valid_id_fields(spatial_hierarchy, geodata_summary)
+  if (!id_fields_are_valid.every(l => l.status === EValidationStatus.Green)) {
+    const support_messages = flatten(id_fields_are_valid.map(v => v.support_messages));
+    return {
+      message: 'Problems with fields used as IDs',
+      status: EValidationStatus.Red,
+      support_messages
+    };
+  }
+
+  // No failures, so must be a pass. Right?
   return {
-    message: 'Invalid spatial_hierarchy',
-    status: EValidationStatus.Red,
-    support_messages: ['a']
+    message: 'Spatial hierarchy and geodata are valid',
+    status: EValidationStatus.Green
   };
 }

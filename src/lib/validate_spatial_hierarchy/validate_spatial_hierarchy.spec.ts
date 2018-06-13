@@ -23,10 +23,10 @@ test('simple valid geodata and spatial_hierarchy', t => {
   const spatial_hierarchy: TSpatialHierarchy = {
     data_version: 0,
     markers: {
-      planning_level_name: 'level',
-      record_location_selection_level_name: 'level',
+      planning_level_name: 'villages',
+      record_location_selection_level_name: 'villages',
       denominator_fields: {
-        field1: 'field1'
+        field1: 'id'
       }
     },
     levels: [
@@ -39,6 +39,7 @@ test('simple valid geodata and spatial_hierarchy', t => {
   };
   const actual = validate_spatial_hierarchy(spatial_hierarchy, geodata);
   const expected = EValidationStatus.Green;
+  console.log('actual.support_messages', actual.support_messages);
   t.is(actual.status, expected);
 });
 

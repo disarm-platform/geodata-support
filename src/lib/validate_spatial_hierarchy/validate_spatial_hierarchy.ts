@@ -6,6 +6,8 @@ import { summarise } from '../summarise';
 import { validate_layer_schema } from '../validate_geodata';
 import { check_layers_and_levels } from './check_layers_and_levels';
 import { required_properties_on_sh_level } from './required_properties_on_sh_level';
+import { summarise_all_levels } from './summarise_all_levels';
+import { markers_valid } from './markers_valid';
 
 /**
  * Confirm that the given spatial_hierarchy config object is valid against the given array of geodata layers.
@@ -36,7 +38,7 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
 
   // Check every spatial_hierarchy level exists in geodata, return early
   const layers_and_levels = check_layers_and_levels(geodata_layer_names, sh_level_names);
-  if (layers_and_levels.status === EValidationStatus.Red) {
+  if (layers_and_levels.status !== EValidationStatus.Green) {
     return layers_and_levels;
   }
 
@@ -55,17 +57,24 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
     };
   }
 
+  // Check `markers` properties are valid
+  const summary = summarise_all_levels(geodata)
+  const markers_are_valid = markers_valid(spatial_hierarchy, summary);
+  
+  if (markers_are_valid.status !== EValidationStatus.Green) {
+    return {
+      message: 'Some fields missing from the level definition',
+      status: EValidationStatus.Red,
+      support_messages: markers_are_valid.support_messages
+    };
+  }
+  
+  
   return {
     message: 'Incomplete tests',
     status: EValidationStatus.Green
   }
-  // TODO: `markers` properties are valid
-  // const summary = summarise_all_levels(geodata);
-  // TODO: planning_level_name is a level
-  // TODO: record_location_selection_level_name is a level
-  // TODO: denominator_fields exist on the planning_level_name level
-
-
+  
   // TODO: The given ID fields are unique, exist on all features, and are of consistent type
   // unique_on_all()
   

@@ -6,9 +6,9 @@ import { TFieldSummary} from "../../config_types/TGeodataSummary";
 export function valid_id_fields(spatial_hierarchy: TSpatialHierarchy, geodata_summary: TGeodataSummary): TValidationResponse[] {
   return spatial_hierarchy.levels.map(level => {
     const level_summary = geodata_summary[level.name]
-    level.field_name // needs to exist_on_all, be unique, consistent type
-    level.display_field_name // needs to exist_on_all, 
-    level.group_by_field // if given, needs to exists in summary_fields
+    // level.field_name needs to exist_on_all, be unique, consistent type
+    // level.display_field_name needs to exist_on_all, 
+    // level.group_by_field if given, needs to exists in summary_fields
 
     const support_messages = [`Level: ${JSON.stringify(level)}`, `Summary: ${level_summary}`];
 

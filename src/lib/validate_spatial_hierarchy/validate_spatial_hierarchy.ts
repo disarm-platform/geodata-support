@@ -70,11 +70,6 @@ export function validate_spatial_hierarchy(spatial_hierarchy: TSpatialHierarchy,
     };
   }
   
-  return {
-    message: 'Incomplete tests',
-    status: EValidationStatus.Green
-  }
-  
   // The given ID fields are unique, exist on all features, and are of consistent type
   const id_fields_are_valid = valid_id_fields(spatial_hierarchy, geodata_summary)
   if (!id_fields_are_valid.every(l => l.status === EValidationStatus.Green)) {

@@ -49,7 +49,8 @@
     "variable-name": [
       "allow-snake-case"
     ],
-    "no-console": false
+    "no-console": false,
+    "ordered-imports": false
   },
   "linterOptions": {
     "exclude": [

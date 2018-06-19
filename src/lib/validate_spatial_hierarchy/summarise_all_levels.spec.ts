@@ -2,7 +2,7 @@
 import test from 'ava';
 import { summarise_all_levels } from './summarise_all_levels';
 import { EFieldType } from '../../config_types/TGeodataSummary';
-import { TGeodataLayer, TGeodata } from '../../config_types/TGeodata';
+import { TGeodata } from '../../config_types/TGeodata';
 
 const base_feature = {
   'type': 'Feature',
@@ -27,15 +27,15 @@ test('works with empty features', t => {
 });
 
 test('works with not-empty features', t => {
-  const geodata: TGeodata = {
+  const geodata = {
     villages: {
       'type': 'FeatureCollection',
       'features': [
         { ...base_feature, properties: { id: 1 } }
       ]
-    } as TGeodataLayer
+    }
   };
-  const actual = summarise_all_levels(geodata);
+  const actual = summarise_all_levels(geodata as TGeodata);
   const expected = {villages: [{field_name: 'id', unique: true, exists_on_all: true, type: EFieldType.Number}]};
   t.deepEqual(actual, expected);
 });

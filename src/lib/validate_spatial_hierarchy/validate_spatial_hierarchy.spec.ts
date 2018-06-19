@@ -1,6 +1,6 @@
 // tslint:disable:no-expression-statement
 import test from 'ava';
-import { TGeodata, TGeodataLayer } from '../../config_types/TGeodata';
+import { TGeodata } from '../../config_types/TGeodata';
 import { TSpatialHierarchy } from '../../config_types/TSpatialHierarchy';
 import { EValidationStatus, TValidationResponse } from '../../config_types/TValidationResponse';
 import { validate_spatial_hierarchy } from './validate_spatial_hierarchy';
@@ -12,13 +12,13 @@ const base_feature = {
 };
 
 test('simple valid geodata and spatial_hierarchy', t => {
-  const geodata: TGeodata = {
+  const geodata = {
     villages: {
       'type': 'FeatureCollection',
       'features': [
         { ...base_feature, properties: { id: 1 } }
       ]
-    } as TGeodataLayer
+    }
   };
   const spatial_hierarchy: TSpatialHierarchy = {
     data_version: 0,
@@ -37,7 +37,7 @@ test('simple valid geodata and spatial_hierarchy', t => {
       }
     ]
   };
-  const actual = validate_spatial_hierarchy(spatial_hierarchy, geodata);
+  const actual = validate_spatial_hierarchy(spatial_hierarchy, geodata as TGeodata);
   const expected = EValidationStatus.Green;
   console.log('actual.support_messages', actual.support_messages);
   t.is(actual.status, expected);
@@ -51,7 +51,7 @@ test('simple geodata and spatial_hierarchy but with some NotPolygons', t => {
       'features': [
         { ...base_feature, properties: { id: 1 }, geometry: { type: 'Point', coordinates: [0, 0] } }
       ]
-    } as TGeodataLayer
+    }
   };
   const spatial_hierarchy: TSpatialHierarchy = {
     data_version: 0,
@@ -71,22 +71,22 @@ test('simple geodata and spatial_hierarchy but with some NotPolygons', t => {
     ]
   };
   const actual = validate_spatial_hierarchy(spatial_hierarchy, geodata);
-  const expected = {
+  const expected: TValidationResponse = {
     message: 'Some layers are not valid geodata: either schema failed or some Features are not Polygons',
     status: EValidationStatus.Red,
-  } as TValidationResponse;
+  };
   t.is(actual.status, expected.status);
   t.is(actual.message, expected.message);
 });
 
 test('valid geodata, but fields in sh not found in geodata', t => {
-  const geodata: TGeodata = {
+  const geodata = {
     villages: {
       'type': 'FeatureCollection',
       'features': [
         { ...base_feature, properties: { id: 1 } }
       ]
-    } as TGeodataLayer
+    }
   };
   const spatial_hierarchy: TSpatialHierarchy = {
     data_version: 0,
@@ -105,11 +105,11 @@ test('valid geodata, but fields in sh not found in geodata', t => {
       }
     ]
   };
-  const actual = validate_spatial_hierarchy(spatial_hierarchy, geodata);
-  const expected = {
+  const actual = validate_spatial_hierarchy(spatial_hierarchy, geodata as TGeodata);
+  const expected: TValidationResponse = {
     message: 'Some fields missing from the level definition',
     status: EValidationStatus.Red
-  } as TValidationResponse;
+  };
   t.is(actual.status, expected.status);
   t.is(actual.message, expected.message);
 });

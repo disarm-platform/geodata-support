@@ -3,15 +3,14 @@ import test from 'ava';
 import { TSpatialHierarchy } from '../../config_types/TSpatialHierarchy';
 import { EValidationStatus } from '../../config_types/TValidationResponse';
 import { markers_valid } from './markers_valid';
-import { EFieldType } from '../../config_types/TGeodataSummary';
-import { TGeodataSummary } from '../../config_types/TGeodataSummary';
+import { EFieldType, TGeodataSummary } from '../../config_types/TGeodataSummary';
 
 test('planning_level_name is a level in geodata', t => {
-  const geodata_summary = {
+  const geodata_summary: TGeodataSummary = {
     villages: [{field_name: 'denominator_field', unique: true, exists_on_all: true, type: EFieldType.Number}]
-  } as TGeodataSummary
+  } 
 
-  const sh = {
+  const sh: TSpatialHierarchy = {
     data_version: 0,
     levels: [],
     markers: {
@@ -21,7 +20,7 @@ test('planning_level_name is a level in geodata', t => {
         denominator1: 'denominator_field'
       }
     }
-  } as TSpatialHierarchy;
+  };
 
   const actual = markers_valid(sh, geodata_summary);
   const expected = EValidationStatus.Green;
@@ -29,11 +28,11 @@ test('planning_level_name is a level in geodata', t => {
 });
 
 test('planning_level_name is NOT a level in geodata', t => {
-  const geodata_summary = {
+  const geodata_summary: TGeodataSummary = {
     not_villages: [{field_name: 'denominator_field', unique: true, exists_on_all: true, type: EFieldType.Number}]
-  } as TGeodataSummary
+  }
 
-  const sh = {
+  const sh: TSpatialHierarchy = {
     data_version: 0,
     levels: [],
     markers: {
@@ -43,7 +42,7 @@ test('planning_level_name is NOT a level in geodata', t => {
         denominator1: 'denominator_field'
       }
     }
-  } as TSpatialHierarchy;
+  }
 
   const actual = markers_valid(sh, geodata_summary);
   const expected = EValidationStatus.Red;
@@ -51,11 +50,11 @@ test('planning_level_name is NOT a level in geodata', t => {
 });
 
 test('record_location_selection_level_name is a level in geodata', t => {
-  const geodata_summary = {
+  const geodata_summary: TGeodataSummary = {
     villages: [{field_name: 'denominator_field', unique: true, exists_on_all: true, type: EFieldType.Number}]
-  } as TGeodataSummary
+  }
 
-  const sh = {
+  const sh: TSpatialHierarchy = {
     data_version: 0,
     levels: [],
     markers: {
@@ -65,7 +64,7 @@ test('record_location_selection_level_name is a level in geodata', t => {
         denominator1: 'denominator_field'
       }
     }
-  } as TSpatialHierarchy;
+  }
 
   const actual = markers_valid(sh, geodata_summary);
   const expected = EValidationStatus.Green;
@@ -73,11 +72,11 @@ test('record_location_selection_level_name is a level in geodata', t => {
 });
 
 test('record_location_selection_level_name is NOT a level in geodata', t => {
-  const geodata_summary = {
+  const geodata_summary: TGeodataSummary = {
     not_villages: [{field_name: 'id', unique: true, exists_on_all: true, type: EFieldType.Number}]
-  } as TGeodataSummary
+  }
 
-  const sh = {
+  const sh: TSpatialHierarchy = {
     data_version: 0,
     levels: [],
     markers: {
@@ -87,7 +86,7 @@ test('record_location_selection_level_name is NOT a level in geodata', t => {
         denominator1: 'denominator_field'
       }
     }
-  } as TSpatialHierarchy;
+  }
 
   const actual = markers_valid(sh, geodata_summary);
   const expected = EValidationStatus.Red;
@@ -96,11 +95,11 @@ test('record_location_selection_level_name is NOT a level in geodata', t => {
 
 
 test('denominator_fields exist on geodata', t => {
-  const geodata_summary = {
+  const geodata_summary: TGeodataSummary = {
     villages: [{field_name: 'denominator_field', unique: true, exists_on_all: true, type: EFieldType.Number}]
-  } as TGeodataSummary
+  }
 
-  const sh = {
+  const sh: TSpatialHierarchy = {
     data_version: 0,
     levels: [],
     markers: {
@@ -110,7 +109,7 @@ test('denominator_fields exist on geodata', t => {
         denominator1: 'denominator_field'
       }
     }
-  } as TSpatialHierarchy;
+  }
 
   const actual = markers_valid(sh, geodata_summary);
   const expected = EValidationStatus.Green;
@@ -118,11 +117,11 @@ test('denominator_fields exist on geodata', t => {
 });
 
 test('denominator_fields DO NOT exist on geodata', t => {
-  const geodata_summary = {
+  const geodata_summary: TGeodataSummary = {
     villages: [{field_name: 'denominator_field', unique: true, exists_on_all: true, type: EFieldType.Number}]
-  } as TGeodataSummary
+  }
 
-  const sh = {
+  const sh: TSpatialHierarchy = {
     data_version: 0,
     levels: [],
     markers: {
@@ -132,7 +131,7 @@ test('denominator_fields DO NOT exist on geodata', t => {
         denominator1: 'different_denominator_field'
       }
     }
-  } as TSpatialHierarchy;
+  }
 
   const actual = markers_valid(sh, geodata_summary);
   const expected = EValidationStatus.Red;

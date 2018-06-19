@@ -26,7 +26,7 @@ test('no Lines allowed', t => {
       { type: 'Feature', geometry: { type: 'Polygon', coordinates: [] }, properties: { id: 2 } },
       { type: 'Feature', geometry: { type: 'Line', coordinates: [] }, properties: { id: 2 } },
     ]
-  };
+  }
   
   const actual = all_polygons(geojson_with_line as GeoJsonFeatureCollection)
   const expected = false
@@ -34,7 +34,7 @@ test('no Lines allowed', t => {
 });
 
 test('no Points allowed', t => {
-  const geojson_with_point: GeoJsonFeatureCollection = {
+  const geojson_with_point = {
     type: 'FeatureCollection',
     features: [
       { type: 'Feature', geometry: { type: 'Polygon', coordinates: [] }, properties: { id: 1, not_all: "value" } },
@@ -43,13 +43,13 @@ test('no Points allowed', t => {
     ]
   };
   
-  const actual = all_polygons(geojson_with_point)
+  const actual = all_polygons(geojson_with_point as GeoJsonFeatureCollection)
   const expected = false
   t.is(actual, expected)
 });
 
 test('no MultiPolygons allowed', t => {
-  const geojson_with_multipolygon: GeoJsonFeatureCollection = {
+  const geojson_with_multipolygon = {
     type: 'FeatureCollection',
     features: [
       { type: 'Feature', geometry: { type: 'Polygon', coordinates: [] }, properties: { id: 1, not_all: "value" } },
@@ -58,7 +58,7 @@ test('no MultiPolygons allowed', t => {
     ]
   };
   
-  const actual = all_polygons(geojson_with_multipolygon)
+  const actual = all_polygons(geojson_with_multipolygon as GeoJsonFeatureCollection)
   const expected = false
   t.is(actual, expected)
 });

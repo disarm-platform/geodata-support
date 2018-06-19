@@ -57,9 +57,9 @@ test('break this', t => {
   const geodata_layer = {type: 'FeatureCollection', features: [
     {...base_feature, properties: {id: 1}},
     {...base_feature, properties: {id: 2}}
-  ]} as TGeodataLayer;
+  ]};
 
-  const actual = validate_layer_schema(geodata_layer);
+  const actual = validate_layer_schema(geodata_layer as TGeodataLayer);
   const expected = EValidationStatus.Red;
 
   t.deepEqual(actual.status, expected);

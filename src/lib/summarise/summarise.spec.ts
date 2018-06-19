@@ -12,32 +12,14 @@ test('has unique id field', t => {
       { ...base_feature, properties: { id: 1 } },
       { ...base_feature, properties: { id: 2 } }
     ]
-  } as TGeodataLayer
-  const actual = summarise(geodata_layer)
-  const expected = [{
+  }
+  const actual = summarise(geodata_layer as TGeodataLayer)
+  const expected: TFieldSummary[] = [{
     field_name: 'id',
     exists_on_all: true,
     unique: true,
     type: EFieldType.Number,
-  } as TFieldSummary]
-
-  t.deepEqual(actual, expected)
-})
-
-test('does not have unique id fields', t => {
-  const geodata_layer = {
-    type: 'FeatureCollection', features: [
-      { ...base_feature, properties: { id: 1 } },
-      { ...base_feature, properties: { id: 1 } }
-    ]
-  } as TGeodataLayer
-  const actual = summarise(geodata_layer)
-  const expected = [{
-    field_name: 'id',
-    exists_on_all: true,
-    unique: false,
-    type: EFieldType.Number,
-  } as TFieldSummary]
+  }]
 
   t.deepEqual(actual, expected)
 })
@@ -48,14 +30,14 @@ test('inconsistent id field', t => {
       { ...base_feature, properties: { id: 1 } },
       { ...base_feature, properties: { id: '2' } }
     ]
-  } as TGeodataLayer
-  const actual = summarise(geodata_layer)
-  const expected = [{
+  }
+  const actual = summarise(geodata_layer as TGeodataLayer)
+  const expected: TFieldSummary[] = [{
     field_name: 'id',
     exists_on_all: true,
     unique: true,
     type: EFieldType.Unreliable
-  } as TFieldSummary]
+  }]
 
   t.deepEqual(actual, expected)
 })
@@ -67,15 +49,15 @@ test('inconsistent and missing id field', t => {
       { ...base_feature, properties: { id: '2' } },
       { ...base_feature, properties: {} }
     ]
-  } as TGeodataLayer
+  }
 
-  const actual = summarise(geodata_layer)
-  const expected = [{
+  const actual = summarise(geodata_layer as TGeodataLayer)
+  const expected: TFieldSummary[] = [{
     field_name: 'id',
     exists_on_all: false,
     unique: true,
     type: EFieldType.Unreliable
-  } as TFieldSummary]
+  }]
 
   t.deepEqual(actual, expected)
 })
@@ -86,14 +68,14 @@ test('id field not on all, but unique where exists', t => {
       { ...base_feature, properties: { id: 1 } },
       { ...base_feature, properties: { other_id: 2 } }
     ]
-  } as TGeodataLayer
-  const actual = summarise(geodata_layer)
-  const expected = [{
+  }
+  const actual = summarise(geodata_layer as TGeodataLayer)
+  const expected: TFieldSummary[] = [{
     field_name: 'id',
     exists_on_all: false,
     unique: true,
     type: EFieldType.Number
-  } as TFieldSummary, {
+  }, {
     field_name: 'other_id',
     exists_on_all: false,
     unique: true,
@@ -107,16 +89,16 @@ test('id field includes unknown type (e.g. function)', t => {
   const geodata_layer = {
     type: 'FeatureCollection', features: [
       { ...base_feature, properties: { id: 1 } },
-      { ...base_feature, properties: { id: function () { } } }
+      { ...base_feature, properties: { id: () => 2 } }
     ]
-  } as TGeodataLayer
-  const actual = summarise(geodata_layer)
-  const expected = [{
+  }
+  const actual = summarise(geodata_layer as TGeodataLayer)
+  const expected: TFieldSummary[] = [{
     field_name: 'id',
     exists_on_all: true,
     unique: true,
     type: EFieldType.Unreliable
-  } as TFieldSummary]
+  }]
 
   t.deepEqual(actual, expected)
 })

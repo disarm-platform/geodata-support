@@ -1,38 +1,28 @@
-import { get } from 'lodash';
+import { get, uniq } from 'lodash';
 import { EFieldType} from '../../config_types/TGeodataSummary';
 import { features_where_found } from './features_where_found';
 
 export function get_type(field_name, properties_array): EFieldType {
-  const features = features_where_found(field_name, properties_array);
+  const properties = features_where_found(field_name, properties_array);
 
-  return features.reduce((existing_type, properties) => {
-    let current_type: EFieldType;
-    const type = typeof get(properties, field_name);
+  // get the type for the field on each feautre.properties
+  const types = properties.map(f => typeof get(f, field_name))
 
+  const unique_types = uniq(types)
+
+  if (unique_types.length === 1) {
+    const type = unique_types[0]
     switch (type) {
       case 'string':
-        current_type = EFieldType.String;
-        break;
+        return EFieldType.String;
       case 'number':
-        current_type = EFieldType.Number;
-        break;
+        return EFieldType.Number;
       case 'boolean':
-        current_type = EFieldType.Boolean;
-        break;
+        return EFieldType.Boolean;
       default:
-        current_type = EFieldType.Unreliable;
+        return EFieldType.Unreliable;
     }
-
-    const already_inconsistent = existing_type === EFieldType.Unreliable;
-    const already_set = existing_type !== EFieldType.NotSet;
-    const different_to_existing = current_type !== existing_type;
-
-    // Couple of special cases
-    if (already_inconsistent) return existing_type;
-    if (already_set && different_to_existing) return EFieldType.Unreliable;
-
-    // Otherwise give me what I'd expect
-    return current_type;
-
-  }, EFieldType.NotSet);
+  } else {
+    return EFieldType.Unreliable;
+  }
 }

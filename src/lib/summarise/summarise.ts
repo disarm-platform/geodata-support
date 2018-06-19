@@ -13,7 +13,7 @@ export function summarise(layer: TGeodataLayer): TFieldSummary[] {
 
   // Iterate the fields
   return fields.map(field_name => {
-    return {
+    const field_summary: TFieldSummary = {
       field_name,
       // Check if exist on all features
       exists_on_all: exists_on_all_features(field_name, all_properties),
@@ -22,7 +22,8 @@ export function summarise(layer: TGeodataLayer): TFieldSummary[] {
       // Get type and check if consistent on all features
       type: get_type(field_name, all_properties)
 
-    } as TFieldSummary;
+    };
+    return field_summary
   });
 }
 

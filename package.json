@@ -55,8 +55,7 @@
     "ajv": "^6.5.0",
     "datalib": "^1.8.0",
     "json-schema": "^0.2.3",
-    "lodash": "^4.17.10",
-    "sha.js": "^2.4.11"
+    "lodash": "^4.17.10"
   },
   "devDependencies": {
     "ava": "^1.0.0-beta.5.1",

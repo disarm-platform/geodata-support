@@ -1,5 +1,5 @@
 {
-  "name": "geodata-support",
+  "name": "@locational/geodata-support",
   "version": "1.0.0",
   "description": "Library to validate geodata",
   "main": "build/main/index.js",

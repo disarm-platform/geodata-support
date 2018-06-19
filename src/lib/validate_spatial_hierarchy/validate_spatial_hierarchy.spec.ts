@@ -174,6 +174,5 @@ test('simple valid geodata but with duplicate ids', t => {
   };
   const actual = validate_spatial_hierarchy(spatial_hierarchy, geodata as TGeodata);
   const expected = EValidationStatus.Red;
-  console.log('actual.support_messages', actual.support_messages);
   t.is(actual.status, expected);
 });

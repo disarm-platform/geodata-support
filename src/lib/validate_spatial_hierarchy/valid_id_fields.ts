@@ -19,6 +19,7 @@ export function valid_id_fields(spatial_hierarchy: TSpatialHierarchy, geodata_su
         support_messages
       }
     }
+
     const valid_level_display_field_name = unique_omnipresent_reliable(find(level.display_field_name, level_summary));
     if (!valid_level_display_field_name) {
       return {
@@ -27,7 +28,8 @@ export function valid_id_fields(spatial_hierarchy: TSpatialHierarchy, geodata_su
         support_messages
       }
     }
-    const valid_level_group_by_field = level.group_by_field ? unique_omnipresent_reliable(find(level.group_by_field, level_summary)) : true;
+
+    const valid_level_group_by_field = level.group_by_field ? omnipresent_reliable(find(level.group_by_field, level_summary)) : true;
     if (!valid_level_group_by_field) {
       return {
         message: 'Invalid level group_by_field',
@@ -46,6 +48,10 @@ export function valid_id_fields(spatial_hierarchy: TSpatialHierarchy, geodata_su
 
 function unique_omnipresent_reliable(found: TFieldSummary): boolean {
   return found.unique && found.exists_on_all && valid_type(found.type)
+}
+
+function omnipresent_reliable(found: TFieldSummary): boolean {
+  return found.exists_on_all && valid_type(found.type)
 }
 
 function valid_type(type: EFieldType): boolean {

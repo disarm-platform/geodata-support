@@ -9,7 +9,7 @@ export function valid_id_fields(spatial_hierarchy: TSpatialHierarchy, geodata_su
     // level.display_field_name needs to exist_on_all, 
     // level.group_by_field if given, needs to exists in summary_fields
 
-    const support_messages = [`Level: ${JSON.stringify(level)}`, `Summary: ${level_summary}`];
+    const support_messages = [`Level: ${JSON.stringify(level)}`, `Summary: ${JSON.stringify(level_summary)}`];
 
     const valid_level_field_name = unique_omnipresent_reliable(find(level.field_name, level_summary));
     if (!valid_level_field_name) {

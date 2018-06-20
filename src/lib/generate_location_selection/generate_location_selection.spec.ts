@@ -58,8 +58,8 @@ test('returns valid location_selection', t => {
       }
     ]
   }
-
-  t.deepEqual(actual, expected)
+  t.is(actual.status, EValidationStatus.Green)
+  t.deepEqual(actual.location_selection, expected)
 })
 
 test('returns validation result when input is invalid', t => {

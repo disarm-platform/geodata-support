@@ -1,11 +1,11 @@
 import { TSpatialHierarchy, TLevel } from "../../config_types/TSpatialHierarchy";
 import { TGeodata, TGeodataLayer } from "../../config_types/TGeodata";
-import { TLocationSelection, TLocationSelectionOption } from "../../config_types/TLocationSelection";
+import { TLocationSelection, TLocationSelectionOption, TLocationSelectionResponse } from "../../config_types/TLocationSelection";
 import { validate_spatial_hierarchy } from "../validate_spatial_hierarchy";
-import { EValidationStatus, TValidationResponse } from "../../config_types/TValidationResponse";
+import { EValidationStatus } from "../../config_types/TValidationResponse";
 
 
-export function generate_location_selection(spatial_hierarchy: TSpatialHierarchy, geodata: TGeodata): TLocationSelection | TValidationResponse {
+export function generate_location_selection(spatial_hierarchy: TSpatialHierarchy, geodata: TGeodata): TLocationSelectionResponse {
   const validation_result = validate_spatial_hierarchy(spatial_hierarchy, geodata)
   if (validation_result.status === EValidationStatus.Red) {
     return validation_result
@@ -21,7 +21,11 @@ export function generate_location_selection(spatial_hierarchy: TSpatialHierarchy
   }
 
 
-  return location_selection
+  return {
+    message: 'Generated location selection',
+    status: EValidationStatus.Green,
+    location_selection
+  }
 }
 
 function generate_location_selection_for_level(geodata_layer: TGeodataLayer, level: TLevel): TLocationSelectionOption[] {

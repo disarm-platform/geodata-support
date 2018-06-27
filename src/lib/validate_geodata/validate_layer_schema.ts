@@ -6,12 +6,10 @@ import { all_polygons } from '../helpy/all_polygons';
 
 // tslint:disable:no-submodule-imports
 import draft_6 from 'ajv/lib/refs/json-schema-draft-06.json';
-import draft_7 from 'ajv/lib/refs/json-schema-draft-07.json';
 const ajv = new Ajv();
 
 // tslint:disable:no-expression-statement
 ajv.addMetaSchema(draft_6)
-ajv.addMetaSchema(draft_7)
 
 /**
  * Check if given geodata is a valid GeoJSON FeatureCollection, and that every

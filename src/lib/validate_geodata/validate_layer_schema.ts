@@ -4,12 +4,7 @@ import { TGeodataLayer } from '../../config_types/TGeodata';
 import { EValidationStatus, TValidationResponse } from '../../config_types/TValidationResponse';
 import { all_polygons } from '../helpy/all_polygons';
 
-// tslint:disable:no-submodule-imports
-import draft_6 from 'ajv/lib/refs/json-schema-draft-06.json';
 const ajv = new Ajv();
-
-// tslint:disable:no-expression-statement
-ajv.addMetaSchema(draft_6)
 
 /**
  * Check if given geodata is a valid GeoJSON FeatureCollection, and that every

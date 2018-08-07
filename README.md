@@ -4,7 +4,7 @@ Library to validate geodata
 
 ## Updating geodata
 
-Read more on the [wiki entry ] (https://github.com/locational/geodata-support/wiki/Updating-geodata) 
+Read more on the [wiki entry](https://github.com/locational/geodata-support/wiki/Updating-geodata) 
 
 ## Objectives
 

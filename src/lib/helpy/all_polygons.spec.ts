@@ -48,7 +48,7 @@ test('no Points allowed', t => {
   t.is(actual, expected)
 });
 
-test('no MultiPolygons allowed', t => {
+test('passes with MultiPolygons', t => {
   const geojson_with_multipolygon = {
     type: 'FeatureCollection',
     features: [
@@ -59,6 +59,6 @@ test('no MultiPolygons allowed', t => {
   };
   
   const actual = all_polygons(geojson_with_multipolygon as GeoJsonFeatureCollection)
-  const expected = false
+  const expected = true
   t.is(actual, expected)
 });
